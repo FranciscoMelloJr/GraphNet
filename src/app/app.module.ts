@@ -13,16 +13,19 @@ import { MatListModule } from '@angular/material/list';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MainPageComponent } from './main-page/main-page.component';
 import { Routes, RouterModule } from '@angular/router';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
+import { ReviewsComponent } from './reviews/reviews.component';
+import { MatCardModule } from '@angular/material/card'; 
 
-
-const routes: Routes = [
-  { path: '', component: MainPageComponent }
-];
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainPageComponent
+    MainPageComponent,
+    AboutComponent,
+    ContactComponent,
+    ReviewsComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +36,8 @@ const routes: Routes = [
     MatIconModule,
     MatButtonModule,
     FlexLayoutModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatCardModule
   ],
   exports:[
     RouterModule
