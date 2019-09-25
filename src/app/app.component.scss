@@ -1,11 +1,13 @@
 .mat-toolbar{
-  height: 12vh;
+  height: 10%;
+  width: 100%;
   background:#364d94;
   color: #ffff;
 }
 
 .mat-sidebar{
-  height: 28vh;
+  height: 30vh;
+  width: 30vh;
   background:#364d94;
   color: #ffff;
 }
@@ -14,6 +16,7 @@
   width: 350px;
   margin-top: 2%;
 }
+
 
 .botaoLogotipo{
   background-color: #364d94;
@@ -77,4 +80,10 @@ button{
 
 .miniMenu {
   margin: 10px;
+}
+
+.miniMenu-cadastro {
+  margin: 10px;
+  color: #364d94;
+  background-color: white;
 }

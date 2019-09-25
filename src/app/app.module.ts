@@ -11,10 +11,18 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MainPageComponent } from './main-page/main-page.component';
+import { Routes, RouterModule } from '@angular/router';
+
+
+const routes: Routes = [
+  { path: '', component: MainPageComponent }
+];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MainPageComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +32,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatListModule,
     MatIconModule,
     MatButtonModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    AppRoutingModule
+  ],
+  exports:[
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
