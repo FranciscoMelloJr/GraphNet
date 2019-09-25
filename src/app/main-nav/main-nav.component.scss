@@ -1,0 +1,51 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.toolbar {
+  height: 8%;
+  background: #364d94;
+  color: #fff;
+}
+
+.toolbar-options {
+  height: 30%;
+  font-size: 100%;
+  margin: 10px;
+  color: gray;
+  -webkit-transition: color 200ms linear;
+  -ms-transition: color 200ms linear;
+  transition: color 200ms linear;
+  &:hover{
+    color: white;
+    -webkit-transition: color 200ms linear;
+    -ms-transition: color 200ms linear;
+    transition: color 200ms linear;
+  }
+}
+
+.toolbar-cadastro {
+  height: 30%;
+  font-size: 100%;
+  margin: 10px;
+  color: #364d94;
+  background-color: white;
+}
+
+.fill {
+  flex: 1 1 auto;
+}
