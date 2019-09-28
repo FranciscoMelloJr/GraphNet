@@ -6,8 +6,8 @@
 }
 
 .mat-sidebar{
-  height: 30vh;
-  width: 30vh;
+  height: 280px;
+  width: 300px;
   background:#364d94;
   color: #ffff;
 }
@@ -33,7 +33,7 @@
 
 .toolbar-options {
   margin: 10px;
-  color: gray;
+  color: rgb(161, 161, 161);
   -webkit-transition: color 200ms linear;
   -ms-transition: color 200ms linear;
   transition: color 200ms linear;
@@ -51,7 +51,7 @@ div {
 
 .mat-sidenav-container{
   background-color: white;
-  min-height: 85vh !important;
+  min-height: 850px !important;
 }
 
 a{
