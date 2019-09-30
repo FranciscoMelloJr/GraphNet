@@ -8,8 +8,29 @@
   
               <div fxFlex="50%">
                     <mat-card class="fundo">
-                        Blablawill
-                    </mat-card>
+
+                        <form class="example-form">   
+                              <mat-form-field class="campo" appearance="outline">
+                                    <input matInput placeholder="Email" [formControl]="emailFormControl">
+                                    <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                                          Digite um e-mail válido
+                                    </mat-error>
+
+                                    <mat-error *ngIf="emailFormControl.hasError('required')">
+                                          O e-mail é <strong>obrigatório</strong>
+                                    </mat-error>
+                              </mat-form-field>
+
+                              <mat-form-field class="campo-select">
+                                    <mat-select placeholder="Categoria">
+                                          <mat-option value="option">Sugestao</mat-option>
+                                          <mat-option value="option">Critica</mat-option>
+                                          <mat-option value="option">Ajuda</mat-option>
+                                    </mat-select>
+                              </mat-form-field>
+                        </form>
+
+                  </mat-card>
               </div>
   
               <div fxFlex="50%">

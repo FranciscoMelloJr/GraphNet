@@ -17,6 +17,12 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { MatCardModule } from '@angular/material/card'; 
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+
+
 
 
 @NgModule({
@@ -37,7 +43,12 @@ import { MatCardModule } from '@angular/material/card';
     MatButtonModule,
     FlexLayoutModule,
     AppRoutingModule,
-    MatCardModule
+    MatCardModule,
+    MatInputModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatSelectModule
   ],
   exports:[
     RouterModule
