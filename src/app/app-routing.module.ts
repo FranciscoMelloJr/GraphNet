@@ -4,13 +4,15 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { ReviewsComponent } from './reviews/reviews.component';
+import { CadastroComponent } from './cadastro/cadastro.component';
 
 
 const routes: Routes = [
   { path: '', component: MainPageComponent },
   { path: 'quem-somos', component: AboutComponent},
   { path: 'contato', component: ContactComponent},
-  { path: 'analises', component: ReviewsComponent}
+  { path: 'analises', component: ReviewsComponent},
+  { path: 'cadastro', component: CadastroComponent}
 ];
 
 @NgModule({

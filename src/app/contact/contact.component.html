@@ -6,10 +6,19 @@
               fxLayoutGap="10px"
               fxLayoutGap.xs="0">
   
-              <div fxFlex="50%">
-                    <mat-card class="fundo">
 
-                        <form class="example-form">   
+            <div fxFlex="nogrow">
+                  <mat-card class="fundo">
+
+                        <form class="form">  
+                              <mat-form-field class="campo" appearance="outline">
+                                    <input matInput placeholder="Nome" [formControl]="nomeFormControl">
+                                    <mat-error *ngIf="nomeFormControl.hasError('required')">
+                                          O nome é <strong>obrigatório</strong>
+                                    </mat-error>
+                              </mat-form-field>
+
+
                               <mat-form-field class="campo" appearance="outline">
                                     <input matInput placeholder="Email" [formControl]="emailFormControl">
                                     <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
@@ -22,22 +31,34 @@
                               </mat-form-field>
 
                               <mat-form-field class="campo-select">
-                                    <mat-select placeholder="Categoria">
-                                          <mat-option value="option">Sugestao</mat-option>
-                                          <mat-option value="option">Critica</mat-option>
+                                    <mat-select placeholder="Categoria" [formControl]="categoriaFormControl">
+                                          <mat-option value="option">Sugestão</mat-option>
+                                          <mat-option value="option">Crítica</mat-option>
                                           <mat-option value="option">Ajuda</mat-option>
                                     </mat-select>
+                                    <mat-error *ngIf="categoriaFormControl.hasError('required')">
+                                                É <strong>obrigatório</strong> selecionar uma categoria
+                                    </mat-error>
                               </mat-form-field>
-                        </form>
+
+                              <mat-form-field class="campo" appearance="outline">
+                                          <textarea matInput placeholder="Descrição" [formControl]="descricaoFormControl"></textarea>
+                                          <mat-error *ngIf="descricaoFormControl.hasError('required')">
+                                                A descrição é <strong>obrigatória</strong>
+                                          </mat-error>
+                              </mat-form-field>
+                              
+                        <a mat-button class="options">Enviar</a>
+                  </form>
 
                   </mat-card>
-              </div>
+            </div>
   
-              <div fxFlex="50%">
-                    <mat-card class="fundo">
-                        Testeosm
-                    </mat-card>
-              </div>
+            <div fxFlex="nogrow">
+                  <mat-card class="fundo">
+                  Testeosm
+                  </mat-card>
+            </div>
         </div>
 </div>
         

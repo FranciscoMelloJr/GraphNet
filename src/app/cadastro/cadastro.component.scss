@@ -1,11 +1,23 @@
 .fundo {
     background-color: white;
     margin-top: 20px;
+    min-width: 300px;
+    max-width: 340px;
+    min-height: 340px;
+    max-height: 500px;
+    margin: 50px;
+    border: 1px solid #3d3d3d;
+    font-size: 18px;
+}
+
+.fundo-cliente {
+    background-color: white;
+    margin-top: 20px;
     min-width: 340px;
     max-width: 340px;
     min-height: 340px;
     max-height: 340px;
-    margin: 20px;
+    margin: 50px;
     border: 1px solid #3d3d3d;
     font-size: 18px;
 }
