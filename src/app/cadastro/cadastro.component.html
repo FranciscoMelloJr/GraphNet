@@ -1,14 +1,14 @@
 <div class="container">
-    Cadastro de Cliente Pendente
-    <div fxLayout
+      Cadastro de Cliente Pendente
+      <div fxLayout
           fxLayout.lt-lg="column"
           fxLayoutAlign="center"
           fxLayoutGap="10px"
           fxLayoutGap.xs="0">
 
 
-        <div fxFlex="nogrow">
-              <mat-card class="fundo">
+            <div fxFlex="nogrow">
+                  <mat-card class="fundo">
 
                   <form class="form">  
                         <mat-form-field class="campo" appearance="outline">
@@ -33,36 +33,47 @@
                         <mat-form-field class="campo" appearance="outline">
                               <input matInput placeholder="Telefone" [formControl]="telefoneFormControl">
                               <mat-error *ngIf="telefoneFormControl.hasError('required')">
-                                    O nome é <strong>obrigatório</strong>
+                                    O telefone é <strong>obrigatório</strong>
                               </mat-error>
                         </mat-form-field>
 
                         <mat-form-field class="campo" appearance="outline">
                               <input matInput placeholder="CEP" [formControl]="cepFormControl">
                               <mat-error *ngIf="cepFormControl.hasError('required')">
-                                    O nome é <strong>obrigatório</strong>
+                                    O CEP é <strong>obrigatório</strong>
                               </mat-error>
                         </mat-form-field>
 
                         <mat-form-field class="campo" appearance="outline">
-                              <input matInput placeholder="Endereço" [formControl]="enderecoFormControl">
+                              <input matInput placeholder="Endereço" [formControl]="enderecoFormControl"
+                              type="text" (keydown.enter)="$event.preventDefault()" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
                               <mat-error *ngIf="enderecoFormControl.hasError('required')">
                                     O endereço é <strong>obrigatório</strong>
                               </mat-error>
                         </mat-form-field>
 
+                        <mat-form-field class="campo-select">
+                                    <mat-select placeholder="Provedor">
+                                          <mat-option value="option">Snet Telecom</mat-option>
+                                    </mat-select>
+                        </mat-form-field>
+
                           
-                  <a mat-button class="options">Enviar</a>
-              </form>
+                        <a mat-button class="options">Enviar</a>
+                  </form>
 
-              </mat-card>
-        </div>
+                  </mat-card>
+            </div>
 
-        <div fxFlex="nogrow">
-              <mat-card class="fundo-cliente">
-                Sua Localização
-              </mat-card>
-        </div>
-    </div>
+            <div fxFlex="nogrow">
+                  <mat-card class="fundo-mapa">
+                  <h5 style="color: #3d3d3d">Sua Localização:</h5>
+                  <agm-map [latitude]="latitude" [longitude]="longitute" [zoom]="zoom">
+                        <agm-marker [latitude]="latitude" [longitude]="longitute" [markerDraggable]="true"
+                        (dragEnd)="markerDragEnd($event)"></agm-marker>
+                  </agm-map>
+                  </mat-card>
+            </div>
+      </div>
 </div>
     

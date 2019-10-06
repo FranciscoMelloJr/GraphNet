@@ -1,23 +1,21 @@
 .fundo {
     background-color: white;
     margin-top: 20px;
-    min-width: 300px;
-    max-width: 340px;
-    min-height: 340px;
-    max-height: 500px;
-    margin: 50px;
+    min-width: 400px;
+    max-width: 400px;
+    max-height: fit-content;
+    margin: 20px;
     border: 1px solid #3d3d3d;
     font-size: 18px;
 }
 
-.fundo-cliente {
+.fundo-mapa {
     background-color: white;
     margin-top: 20px;
-    min-width: 340px;
-    max-width: 340px;
-    min-height: 340px;
-    max-height: 340px;
-    margin: 50px;
+    min-width: 400px;
+    max-width: 400px;
+    max-height: fit-content;
+    margin: 20px;
     border: 1px solid #3d3d3d;
     font-size: 18px;
 }
@@ -63,4 +61,9 @@
       transition: color 200ms linear;
     }
     
-  }
+}
+
+agm-map {
+    width: 400px;
+    height: 430px;
+}

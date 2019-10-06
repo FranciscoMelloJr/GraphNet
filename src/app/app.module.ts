@@ -22,6 +22,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
 import { CadastroComponent } from './cadastro/cadastro.component';
+import { CadastroProvedorComponent } from './cadastro-provedor/cadastro-provedor.component';
+import { AgmCoreModule } from '@agm/core';
+
 
 
 
@@ -33,7 +36,8 @@ import { CadastroComponent } from './cadastro/cadastro.component';
     AboutComponent,
     ContactComponent,
     ReviewsComponent,
-    CadastroComponent
+    CadastroComponent,
+    CadastroProvedorComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +55,11 @@ import { CadastroComponent } from './cadastro/cadastro.component';
     ReactiveFormsModule,
     FormsModule,
     MatSelectModule,
-    HttpClientModule
+    HttpClientModule,
+    AgmCoreModule.forRoot({
+      apiKey: '',
+      libraries: ['geometry', 'places']
+    })
   ],
   exports:[
     RouterModule

@@ -1,9 +1,9 @@
 .fundo {
     background-color: white;
     margin-top: 20px;
-    min-width: 340px;
-    max-width: 340px;
-    min-height: 430px;
+    min-width: 400px;
+    max-width: 400px;
+    min-height: fit-content;
     margin: 20px;
     border: 1px solid #3d3d3d;
     font-size: 18px;
@@ -23,15 +23,12 @@
 .campo {
     width: 330px;   
     color: #3d3d3d;
-    margin-top: 5px;
-    margin-bottom: 5px;
     background-color: white;
 }
 
 .campo-select {
     width: 330px;
     color: #3d3d3d;
-    margin: 5px;
     background-color: white;
 }
 
@@ -47,10 +44,10 @@
     -ms-transition: color 200ms linear;
     transition: color 200ms linear;
     &:hover{
-      color: white;
-      -webkit-transition: color 200ms linear;
-      -ms-transition: color 200ms linear;
-      transition: color 200ms linear;
+        color: white;
+        -webkit-transition: color 200ms linear;
+        -ms-transition: color 200ms linear;
+        transition: color 200ms linear;
     }
     
-  }
+}
