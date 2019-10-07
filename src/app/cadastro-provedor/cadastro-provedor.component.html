@@ -1,0 +1,61 @@
+<div class="container">
+      Cadastro de Provedor
+      <div fxLayout
+          fxLayout.lt-lg="column"
+          fxLayoutAlign="center"
+          fxLayoutGap="10px"
+          fxLayoutGap.xs="0">
+
+
+            <div fxFlex="nogrow">
+                  <mat-card class="fundo">
+
+                        <form class="form">  
+                              <h4 style="color: #3d3d3d">Suas informações serão enviadas via e-mail para a Equipe GraphNet</h4>
+
+                              <mat-form-field class="campo" appearance="outline">
+                                    <input matInput placeholder="Razão Social" [formControl]="razaoFormControl">
+                                    <mat-error *ngIf="razaoFormControl.hasError('required')">
+                                          A Razão Social é <strong>obrigatória</strong>
+                                    </mat-error>
+                              </mat-form-field>
+
+                              <mat-form-field class="campo" appearance="outline">
+                                    <input matInput placeholder="Nome Fantasia" [formControl]="nomeFormControl">
+                                    <mat-error *ngIf="nomeFormControl.hasError('required')">
+                                          O Nome Fantasia é <strong>obrigatório</strong>
+                                    </mat-error>
+                              </mat-form-field>
+
+                              <mat-form-field class="campo" appearance="outline">
+                                    <input matInput placeholder="Email" [formControl]="emailFormControl">
+                                    <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                                          Digite um e-mail válido
+                                    </mat-error>
+
+                                    <mat-error *ngIf="emailFormControl.hasError('required')">
+                                          O e-mail é <strong>obrigatório</strong>
+                                    </mat-error>
+                              </mat-form-field>
+
+                              <mat-form-field class="campo" appearance="outline">
+                                          <input matInput placeholder="Telefone" [formControl]="telefoneFormControl">
+                                          <mat-error *ngIf="telefoneFormControl.hasError('required')">
+                                                O telefone é <strong>obrigatório</strong>
+                                          </mat-error>
+                              </mat-form-field>
+
+                              <mat-form-field class="campo" appearance="outline">
+                                          <input matInput placeholder="CNPJ" [formControl]="cnpjFormControl">
+                                          <mat-error *ngIf="cnpjFormControl.hasError('required')">
+                                                O CNPJ é <strong>obrigatório</strong>
+                                          </mat-error>
+                              </mat-form-field>
+
+                              <a mat-button class="options">Enviar</a>
+                        </form>
+                  </mat-card>
+            </div>
+      </div>
+</div>
+    

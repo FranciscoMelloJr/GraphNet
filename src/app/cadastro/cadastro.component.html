@@ -1,0 +1,79 @@
+<div class="container">
+      Cadastro de Cliente Pendente
+      <div fxLayout
+          fxLayout.lt-lg="column"
+          fxLayoutAlign="center"
+          fxLayoutGap="10px"
+          fxLayoutGap.xs="0">
+
+
+            <div fxFlex="nogrow">
+                  <mat-card class="fundo">
+
+                  <form class="form">  
+                        <mat-form-field class="campo" appearance="outline">
+                              <input matInput placeholder="Nome" [formControl]="nomeFormControl">
+                              <mat-error *ngIf="nomeFormControl.hasError('required')">
+                                    O nome é <strong>obrigatório</strong>
+                              </mat-error>
+                        </mat-form-field>
+
+
+                        <mat-form-field class="campo" appearance="outline">
+                              <input matInput placeholder="Email" [formControl]="emailFormControl">
+                              <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                                    Digite um e-mail válido
+                              </mat-error>
+
+                              <mat-error *ngIf="emailFormControl.hasError('required')">
+                                    O e-mail é <strong>obrigatório</strong>
+                              </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="campo" appearance="outline">
+                              <input matInput placeholder="Telefone" [formControl]="telefoneFormControl">
+                              <mat-error *ngIf="telefoneFormControl.hasError('required')">
+                                    O telefone é <strong>obrigatório</strong>
+                              </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="campo" appearance="outline">
+                              <input matInput placeholder="CEP" [formControl]="cepFormControl">
+                              <mat-error *ngIf="cepFormControl.hasError('required')">
+                                    O CEP é <strong>obrigatório</strong>
+                              </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="campo" appearance="outline">
+                              <input matInput placeholder="Endereço" [formControl]="enderecoFormControl"
+                              type="text" (keydown.enter)="$event.preventDefault()" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
+                              <mat-error *ngIf="enderecoFormControl.hasError('required')">
+                                    O endereço é <strong>obrigatório</strong>
+                              </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="campo-select">
+                                    <mat-select placeholder="Provedor">
+                                          <mat-option value="option">Snet Telecom</mat-option>
+                                    </mat-select>
+                        </mat-form-field>
+
+                          
+                        <a mat-button class="options">Enviar</a>
+                  </form>
+
+                  </mat-card>
+            </div>
+
+            <div fxFlex="nogrow">
+                  <mat-card class="fundo-mapa">
+                  <h5 style="color: #3d3d3d">Sua Localização:</h5>
+                  <agm-map [latitude]="latitude" [longitude]="longitute" [zoom]="zoom">
+                        <agm-marker [latitude]="latitude" [longitude]="longitute" [markerDraggable]="true"
+                        (dragEnd)="markerDragEnd($event)"></agm-marker>
+                  </agm-map>
+                  </mat-card>
+            </div>
+      </div>
+</div>
+    

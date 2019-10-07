@@ -1,0 +1,89 @@
+.mat-toolbar{
+  height: 90px;
+  width: 100%;
+  background:#364d94;
+  color: #ffff;
+}
+
+.mat-sidebar{
+  height: 280px;
+  width: 300px;
+  background:#364d94;
+  color: #ffff;
+}
+
+.logotipo{
+  margin-top: 3%;
+  width: 280px;
+}
+
+
+.botaoLogotipo{
+  background-color: #364d94;
+  
+}
+
+.toolbar-cadastro {
+  height: 50%;
+  font-size: 110%;
+  margin: 10px;
+  color: #364d94;
+  background-color: white;
+}
+
+.toolbar-options {
+  margin: 10px;
+  color: rgb(161, 161, 161);
+  -webkit-transition: color 200ms linear;
+  -ms-transition: color 200ms linear;
+  transition: color 200ms linear;
+  &:hover{
+    color: white;
+    -webkit-transition: color 200ms linear;
+    -ms-transition: color 200ms linear;
+    transition: color 200ms linear;
+  }
+}
+
+div {
+    overflow: inherit;
+}
+
+.mat-sidenav-container{
+  background-color: white;
+  min-height: 800px !important;
+}
+
+a{
+    text-decoration: none;
+    font-size: 110%;
+    white-space: normal;
+}
+
+button{
+    font-size: 110%;
+    min-width: min-content;
+}
+
+.example-icon {
+    padding: 0 14px;
+  }
+
+.fill {
+   flex: 1 1 auto;
+}
+
+.mat-sidenav-content{
+    font-size: 200%;
+    text-align: center;
+}
+
+.miniMenu {
+  margin: 10px;
+}
+
+.miniMenu-cadastro {
+  margin: 10px;
+  color: #364d94;
+  background-color: white;
+}

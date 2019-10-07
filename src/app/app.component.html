@@ -1,0 +1,40 @@
+<div> 
+  <mat-toolbar>
+    <div fxShow="true" fxHide.gt-sm="true">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+
+    <a mat-button routerLink="/">
+      <span><img class="logotipo" src="../assets/Logotipo.png"></span>
+    </a>
+    
+    <div fxShow="true" fxHide.lt-md="true">
+      <a mat-button class="toolbar-options" routerLink="/quem-somos">Quem Somos?</a>
+      <a mat-button class="toolbar-options" routerLink="/contato">Contato</a>
+      <a mat-button class="toolbar-options" routerLink="/analises">Análises</a>
+    </div>  
+      
+    <span class="fill"></span>
+      
+    <div fxShow="true" fxHide.lt-md="true">
+      <a mat-button class="toolbar-cadastro" routerLink="/cadastro">Cadastre-se!</a>
+    </div>
+     
+  </mat-toolbar>
+  <mat-sidenav-container fxFlexFill class="example-container">
+    <mat-sidenav class="mat-sidebar" #sidenav fxLayout="column" mode="over"  opened="false" fxHide.gt-sm="true">
+      <div fxLayout="column">
+        <a mat-button class="miniMenu" routerLink="/">Home</a>
+        <a mat-button class="miniMenu" routerLink="/quem-somos">Quem Somos?</a>
+        <a mat-button class="miniMenu" routerLink="/contato">Contato</a>
+        <a mat-button class="miniMenu" routerLink="/analises">Análises</a>
+        <a mat-button class="miniMenu-cadastro" routerLink="/cadastro">Cadastre-se!</a>
+      </div>
+    </mat-sidenav>
+    <mat-sidenav-content fxFlexFill>
+        <router-outlet></router-outlet>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>
