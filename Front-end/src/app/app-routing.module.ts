@@ -6,6 +6,7 @@ import { ContactComponent } from './contact/contact.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { CadastroProvedorComponent } from './cadastro-provedor/cadastro-provedor.component';
+import { LoginProvedorComponent } from './login-provedor/login-provedor.component';
 
 
 const routes: Routes = [
@@ -14,7 +15,8 @@ const routes: Routes = [
   { path: 'contato', component: ContactComponent},
   { path: 'analises', component: ReviewsComponent},
   { path: 'cadastro', component: CadastroComponent},
-  { path: 'cadastro-provedor', component: CadastroProvedorComponent}
+  { path: 'cadastro-provedor', component: CadastroProvedorComponent},
+  { path: 'login', component: LoginProvedorComponent}
 ];
 
 @NgModule({

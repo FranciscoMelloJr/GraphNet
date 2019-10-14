@@ -24,6 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { CadastroProvedorComponent } from './cadastro-provedor/cadastro-provedor.component';
 import { AgmCoreModule } from '@agm/core';
+import { LoginProvedorComponent } from './login-provedor/login-provedor.component';
 
 
 
@@ -37,7 +38,8 @@ import { AgmCoreModule } from '@agm/core';
     ContactComponent,
     ReviewsComponent,
     CadastroComponent,
-    CadastroProvedorComponent
+    CadastroProvedorComponent,
+    LoginProvedorComponent
   ],
   imports: [
     BrowserModule,
