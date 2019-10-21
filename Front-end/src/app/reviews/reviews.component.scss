@@ -1,0 +1,57 @@
+.fundo {
+    background-color: white;
+    margin-top: 20px;
+    min-width: 340px;
+    max-width: 340px;
+    min-height: 430px;
+    margin: 20px;
+    border: 1px solid #3d3d3d;
+    font-size: 18px;
+}
+
+.container {
+    margin-top: 50px;
+    color: #3d3d3d;
+}
+
+.form {
+    min-width: fit-content;
+    max-width: fit-content;
+    font-size: 13px;
+}
+  
+.campo {
+    width: 330px;   
+    color: #3d3d3d;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: white;
+}
+
+.campo-select {
+    width: 330px;
+    font-size: 20px;   
+    color: #3d3d3d;
+    margin: 8px;
+    background-color: white;
+}
+
+.options {
+    font-size: 15px;
+    width: fit-content;
+    height:fit-content;
+    margin-top: 25px;
+    margin-right: 20px;
+    background-color: #364d94;
+    color: black;
+    -webkit-transition: color 200ms linear;
+    -ms-transition: color 200ms linear;
+    transition: color 200ms linear;
+    &:hover{
+      color: white;
+      -webkit-transition: color 200ms linear;
+      -ms-transition: color 200ms linear;
+      transition: color 200ms linear;
+    }
+    
+  }
