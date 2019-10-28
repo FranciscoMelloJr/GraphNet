@@ -27,7 +27,7 @@ public class Cto implements Serializable {
 	@JsonIgnore
 	@OneToMany(mappedBy = "cliente")
 	private List<Cliente> clientesCTO = new ArrayList<>();
-	
+
 	public Cto() {
 
 	}
@@ -37,6 +37,14 @@ public class Cto implements Serializable {
 		this.id = id;
 		this.nome = nome;
 		this.tipo = (tipo == null) ? null : tipo.getCod();
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public Integer getNome() {
