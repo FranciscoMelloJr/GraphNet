@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import br.unisul.web.sexta.domain.Cliente;
-import br.unisul.web.sexta.dtos.ClienteDTO;
-import br.unisul.web.sexta.dtos.ClienteNewDTO;
-import br.unisul.web.sexta.services.ClienteService;
+import com.graphnet.project.domain.Cliente;
+import com.graphnet.project.dtos.ClienteDTO;
+import com.graphnet.project.dtos.ClienteNewDTO;
+import com.graphnet.project.services.ClienteService;
 
 @RestController
 @RequestMapping(value = "/clientes")
