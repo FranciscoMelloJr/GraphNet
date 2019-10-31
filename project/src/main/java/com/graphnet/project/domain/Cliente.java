@@ -22,7 +22,8 @@ public class Cliente implements Serializable {
 	private String email;
 	private Integer telefone;
 	private String cep;
-	private String endereco;
+	private String longitude;
+	private String latitude;
 	private String provedor;
 	private String status; // Ativo em tal caixa / Solicitou no dia tal / aguardando vaga/liberação
 
@@ -30,14 +31,15 @@ public class Cliente implements Serializable {
 	}
 
 	public Cliente(Integer id, String nome, TipoCliente tipo, String email, Integer telefone, String cep,
-			String endereco, String provedor) {
+			String longitude, String latitude, String provedor) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.telefone = telefone;
 		this.cep = cep;
-		this.endereco = endereco;
+		this.latitude = latitude;
+		this.longitude = longitude;
 		this.provedor = provedor;
 		this.tipo = (tipo == null) ? null : tipo.getCod();
 	}
@@ -82,12 +84,20 @@ public class Cliente implements Serializable {
 		this.cep = cep;
 	}
 
-	public String getEndereco() {
-		return endereco;
+	public String getLongitude() {
+		return longitude;
 	}
 
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+
+	public String getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
 	}
 
 	public String getProvedor() {

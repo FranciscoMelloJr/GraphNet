@@ -2,7 +2,8 @@ package com.graphnet.project.domain.enums;
 
 public enum TipoCliente {
 
-	CLIENTE_ATIVO(1, "Cliente ativo"), CLIENTE_PENDENTE(2, "Vaga reservada para cliente"), CLIENTE_INATIVO(3, "Cliente aguardando vaga");
+	CLIENTE_ATIVO(1, "Cliente ativo"), CLIENTE_PENDENTE(2, "Vaga reservada para cliente"),
+	CLIENTE_INATIVO(3, "Cliente aguardando vaga");
 
 	private int cod;
 	private String descricao;

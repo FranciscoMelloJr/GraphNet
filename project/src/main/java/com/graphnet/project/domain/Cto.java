@@ -23,6 +23,7 @@ public class Cto implements Serializable {
 
 	private Integer nome;
 	private Integer tipo;
+	private String provedor;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "cliente")
@@ -32,11 +33,20 @@ public class Cto implements Serializable {
 
 	}
 
-	public Cto(Integer id, Integer nome, TipoCTO tipo) {
+	public Cto(Integer id, Integer nome, TipoCTO tipo, Provedor provedor) {
 		super();
 		this.id = id;
 		this.nome = nome;
+		this.provedor = provedor.getNome();
 		this.tipo = (tipo == null) ? null : tipo.getCod();
+	}
+
+	public String getProvedor() {
+		return provedor;
+	}
+
+	public void setProvedor(String provedor) {
+		this.provedor = provedor;
 	}
 
 	public Integer getId() {
