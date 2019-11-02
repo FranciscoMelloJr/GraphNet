@@ -33,7 +33,9 @@ export class CadastroComponent implements OnInit {
 
 
   inserir(form: FormControl) {
-      this.service.adicionar(this.cliente);
+    this.cliente.latitude = this.latitude.toString();
+    this.cliente.longitude = this.longitude.toString();
+    this.service.adicionar(this.cliente);
   }
 
   
