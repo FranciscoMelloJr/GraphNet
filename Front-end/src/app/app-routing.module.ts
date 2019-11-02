@@ -7,7 +7,6 @@ import { ReviewsComponent } from './reviews/reviews.component';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { CadastroProvedorComponent } from './cadastro-provedor/cadastro-provedor.component';
 import { LoginProvedorComponent } from './login-provedor/login-provedor.component';
-import { ProvedorComponent } from './provedor/provedor.component';
 
 
 const routes: Routes = [
@@ -18,7 +17,6 @@ const routes: Routes = [
   { path: 'cadastro', component: CadastroComponent},
   { path: 'cadastro-provedor', component: CadastroProvedorComponent},
   { path: 'login', component: LoginProvedorComponent},
-  { path: 'provedor', component: ProvedorComponent}
 ];
 
 @NgModule({

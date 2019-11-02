@@ -25,8 +25,6 @@ import { CadastroComponent } from './cadastro/cadastro.component';
 import { CadastroProvedorComponent } from './cadastro-provedor/cadastro-provedor.component';
 import { AgmCoreModule } from '@agm/core';
 import { LoginProvedorComponent } from './login-provedor/login-provedor.component';
-import { ProvedorComponent } from './provedor/provedor.component';
-
 
 
 
@@ -41,7 +39,6 @@ import { ProvedorComponent } from './provedor/provedor.component';
     CadastroComponent,
     CadastroProvedorComponent,
     LoginProvedorComponent,
-    ProvedorComponent
   ],
   imports: [
     BrowserModule,
