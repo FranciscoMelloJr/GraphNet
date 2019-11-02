@@ -51,12 +51,14 @@
                         </mat-form-field>
 
                         <mat-form-field class="campo-select">
-                                    <mat-select placeholder="Provedor">
-                                          <mat-option value="option">Snet Telecom</mat-option>
-                                          <mat-option value="option">Sul Internet</mat-option>
-                                          <mat-option value="option">OI</mat-option>
+                                    <mat-select [(value)]="selecionado" placeholder="Provedor">
+                                          <mat-option value="SnetTelecom">Snet Telecom</mat-option>
+                                          <mat-option value="Sul Internet">Sul Internet</mat-option>
+                                          <mat-option value="OI">OI</mat-option>
                                     </mat-select>
                         </mat-form-field>
+
+                        <p>You selected: {{selecionado}}</p>
 
                           
                         <a type="submit" mat-button class="options">Enviar</a>
