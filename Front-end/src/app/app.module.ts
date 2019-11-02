@@ -59,7 +59,7 @@ import { LoginProvedorComponent } from './login-provedor/login-provedor.componen
     MatSelectModule,
     HttpClientModule,
     AgmCoreModule.forRoot({
-      apiKey: '',
+      apiKey: 'AIzaSyB9BLnIX5dpyLr6OkWWd-gH0wBDcVgEPhE',
       libraries: ['geometry', 'places']
     })
   ],

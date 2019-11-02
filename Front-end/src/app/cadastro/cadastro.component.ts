@@ -1,6 +1,10 @@
+import { Cliente } from './model';
 import { FormControl, Validators } from '@angular/forms';
 import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { MapsAPILoader, MouseEvent } from '@agm/core';
+import { CadastroService } from './cadastro.service';
+import { ActivatedRoute, Router } from '@angular/router';
+
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.component.html',
@@ -18,12 +22,21 @@ export class CadastroComponent implements OnInit {
   @ViewChild('search', {static: false})
   public searchElementRef: ElementRef;
   
+  cliente = new Cliente();
+
   constructor(
     private mapsAPILoader: MapsAPILoader,
-    private ngZone: NgZone) {
+    private ngZone: NgZone,
+    private service: CadastroService,
+    private rota: ActivatedRoute,
+    private principal: Router) {}
 
-      }
 
+  inserir(form: FormControl) {
+      this.service.adicionar(this.cliente);
+  }
+
+  
   ngOnInit() {
     this.mapsAPILoader.load().then(() => {
       this.setLocalizacao();
@@ -72,9 +85,7 @@ export class CadastroComponent implements OnInit {
     Validators.required
   ]);
  
-  enderecoFormControl = new FormControl('', [
-    Validators.required
-  ]);
+  
 
   private setLocalizacao() {
     if ('geolocation' in navigator) {
@@ -82,6 +93,7 @@ export class CadastroComponent implements OnInit {
         this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;
         this.zoom = 15;
+        this.getAddress(this.latitude, this.longitude);
       });
     }
   }
