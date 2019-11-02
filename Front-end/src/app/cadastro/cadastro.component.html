@@ -10,7 +10,8 @@
             <div fxFlex="nogrow">
                   <mat-card class="fundo">
 
-                  <form class="form">  
+                  <form class="form" #f="ngForm" (ngSubmit)="inserir(f)">  
+                        
                         <mat-form-field class="campo" appearance="outline">
                               <input [(ngModel)]="cliente.nome" matInput placeholder="Nome" [formControl]="nomeFormControl">
                               <mat-error *ngIf="nomeFormControl.hasError('required')">
@@ -50,13 +51,15 @@
                         </mat-form-field>
 
                         <mat-form-field class="campo-select">
-                                    <mat-select placeholder="Provedor">
+                                    <mat-select [(ngModel)]="cliente.provedor" placeholder="Provedor">
                                           <mat-option value="option">Snet Telecom</mat-option>
+                                          <mat-option value="option">Sul Internet</mat-option>
+                                          <mat-option value="option">OI</mat-option>
                                     </mat-select>
                         </mat-form-field>
 
                           
-                        <a mat-button class="options">Enviar</a>
+                        <a type="submit" mat-button class="options">Enviar</a>
                   </form>
 
                   </mat-card>

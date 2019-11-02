@@ -1,0 +1,26 @@
+<div class="container">
+    Cadastro de Cliente Pendente
+    <div fxLayout
+        fxLayout.lt-lg="column"
+        fxLayoutAlign="center"
+        fxLayoutGap="10px"
+        fxLayoutGap.xs="0">
+        
+          <div fxFlex="nogrow">
+                <mat-card class="fundo-mapa">
+                <h5 style="color: #3d3d3d">Sua Localização:</h5>
+                <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+                      <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true"
+                      (dragEnd)="markerDragEnd($event)"></agm-marker>
+                </agm-map>
+                </mat-card>
+          </div>
+
+          <div fxFlex="nogrow">
+            <mat-card class="fundo">
+
+            </mat-card>
+      </div>
+    </div>
+</div>
+  
