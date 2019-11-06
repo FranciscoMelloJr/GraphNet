@@ -48,13 +48,13 @@ public class ClienteService {
 
 	// Conversão de ClienteDTO para Cliente
 	public Cliente fromDTO(ClienteDTO objDto) {
-		return new Cliente(objDto.getId(), objDto.getNome(), null, null, null, null, null, null);
+		return new Cliente(objDto.getId(), objDto.getNome(), null, null, null, null, null, null, null);
 	}
 
 	// Conversão de ClienteNewDTO para Cliente
 	public Cliente fromDTO(ClienteNewDTO objDto) {
 		Cliente cli = new Cliente(null, objDto.getNome(), TipoCliente.toEnum(objDto.getTipo()), null, null, null, null,
-				null);
+				null, null);
 
 		// cli.getTelefones().add(objDto.getTelefone1());
 		// if (objDto.getTelefone2() != null) {
