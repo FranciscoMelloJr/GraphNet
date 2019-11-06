@@ -12,6 +12,7 @@ public class ClienteDTO implements Serializable {
 	private String nome;
 	private String email;
 	private String telefone;
+	private String cep;
 	private String cpf;
 	private String longitude;
 	private String latitude;
@@ -19,11 +20,12 @@ public class ClienteDTO implements Serializable {
 	public ClienteDTO() {
 	}
 
-	public ClienteDTO(String nome, String email, String telefone, String cpf,
+	public ClienteDTO(String nome, String email, String telefone, String cep, String cpf,
 	String longitude, String latitude) {
 		this.nome = nome;
 		this.email = email;
 		this.telefone = telefone;
+		this.cep = cep;
 		this.cpf = cpf;
 		this.longitude = longitude;
 		this.latitude = latitude;
@@ -33,6 +35,7 @@ public class ClienteDTO implements Serializable {
 		this.nome = c.getNome();
 		this.email = c.getEmail();
 		this.telefone = c.getTelefone();
+		this.cep = c.getCep();
 		this.cpf = c.getCpf();
 		this.longitude = c.getLongitude();
 		this.latitude = c.getLatitude();
@@ -68,6 +71,14 @@ public class ClienteDTO implements Serializable {
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
 	}
 
 	public String getCpf() {

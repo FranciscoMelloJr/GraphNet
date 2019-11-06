@@ -23,6 +23,7 @@ public class Cliente implements Serializable {
 	private String nome;
 	private String email;
 	private String telefone;
+	private String cep;
 	private String cpf;
 	private String longitude;
 	private String latitude;
@@ -34,8 +35,9 @@ public class Cliente implements Serializable {
 	public Cliente() {
 	}
 
-	public Cliente(Integer id, String nome, String email, String telefone, String cpf,
+	public Cliente(Integer id, String nome, String email, String telefone, String cep, String cpf,
 	String longitude, String latitude) {
+		this.cep = cep;
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
@@ -49,6 +51,7 @@ public class Cliente implements Serializable {
 		this.nome = c.getNome();
 		this.email = c.getEmail();
 		this.telefone = c.getTelefone();
+		this.cep = c.getCep();
 		this.cpf = c.getCpf();
 		this.longitude = c.getLongitude();
 		this.latitude = c.getLatitude();
@@ -109,6 +112,14 @@ public class Cliente implements Serializable {
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+	
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
 	}
 
 	public String getCpf() {
