@@ -25,6 +25,7 @@ import { CadastroComponent } from './cadastro/cadastro.component';
 import { CadastroProvedorComponent } from './cadastro-provedor/cadastro-provedor.component';
 import { AgmCoreModule } from '@agm/core';
 import { LoginProvedorComponent } from './login-provedor/login-provedor.component';
+import { ProvedorComponent } from './provedor/provedor.component';
 
 
 
@@ -39,6 +40,7 @@ import { LoginProvedorComponent } from './login-provedor/login-provedor.componen
     CadastroComponent,
     CadastroProvedorComponent,
     LoginProvedorComponent,
+    ProvedorComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,7 +60,7 @@ import { LoginProvedorComponent } from './login-provedor/login-provedor.componen
     MatSelectModule,
     HttpClientModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyB9BLnIX5dpyLr6OkWWd-gH0wBDcVgEPhE',
+      apiKey: '(Colocar a chave de API aqui)',
       libraries: ['geometry', 'places']
     })
   ],

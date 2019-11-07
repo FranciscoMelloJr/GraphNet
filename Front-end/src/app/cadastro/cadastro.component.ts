@@ -1,4 +1,4 @@
-import { Cliente } from './model';
+import { Cliente, Provedor } from './model';
 import { FormControl, Validators } from '@angular/forms';
 import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { MapsAPILoader, MouseEvent } from '@agm/core';
@@ -16,7 +16,27 @@ export class CadastroComponent implements OnInit {
   longitude: number;
   zoom: number;
   address: string;
+
+  filtro: string;
+
+  provedores = [];
+
+  provedoresAdicionados : Provedor [] = [
+    {cep: "123",
+    cnpj: "123",
+    email: "123",
+      id: 123,
+      nomeFantasia: "123",
+      razaoSocial: "123",
+      senha: "123",
+      telefone: "123"}
+  ];
+
+
   private geoCoder;
+
+
+
 
   
   @ViewChild('search', {static: false})
@@ -33,6 +53,10 @@ export class CadastroComponent implements OnInit {
 
 
   inserir(form: FormControl) {
+    this.cliente.nome = this.nomeFormControl.value;
+    this.cliente.email = this.emailFormControl.value;
+    this.cliente.telefone = this.telefoneFormControl.value;
+    this.cliente.cep = this.cepFormControl.value;
     this.cliente.latitude = this.latitude.toString();
     this.cliente.longitude = this.longitude.toString();
     this.service.adicionar(this.cliente);
@@ -125,6 +149,19 @@ export class CadastroComponent implements OnInit {
     });
   }
  
+  filtrar(){
+   
+    this.filtro = this.cepFormControl.value;
+    this.service.pesquisar(this.filtro)
+    .then((dados)=>{
+      this.provedores = dados;
+    });
+    
+    console.log(this.provedoresAdicionados);
+    console.log(this.provedores);
+    
+    
+  }
 
 
 

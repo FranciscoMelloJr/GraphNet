@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Provedor } from './model';
 
 @Component({
   selector: 'app-login-provedor',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginProvedorComponent implements OnInit {
 
+  
+  provedor: Provedor = new Provedor();
+
   constructor() { }
 
   ngOnInit() {
+
+  }
+
+  fazerLogin(){
   }
 
 }

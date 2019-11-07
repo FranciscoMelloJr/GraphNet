@@ -14,14 +14,14 @@
                             <h4 style="color: #3d3d3d">Digite as suas informações:</h4>
 
                             <mat-form-field class="campo" appearance="outline">
-                                        <input matInput placeholder="CNPJ">
+                              <input matInput [(ngModel)]="provedor.cnpj" name="cnpj" id="cnpj" class="form-control" placeholder="CNPJ">
                             </mat-form-field>
 
                             <mat-form-field class="campo" appearance="outline">
-                                <input type="password" matInput placeholder="Senha">
+                              <input type="password" matInput [(ngModel)]="provedor.senha" name="senha" id="senha" class="form-control" placeholder="Senha">
                             </mat-form-field>
 
-                            <a mat-button class="options">Enviar</a>
+                            <a mat-button class="options" (click)="fazerLogin()">Enviar</a>
                       </form>
                 </mat-card>
           </div>
