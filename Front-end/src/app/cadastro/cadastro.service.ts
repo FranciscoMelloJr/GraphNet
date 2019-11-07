@@ -1,4 +1,4 @@
-import { Cliente } from './model';
+import { Cliente, Solicitacao } from './model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -9,6 +9,7 @@ export class CadastroService {
 
   clientesURL = 'http://localhost:8080/clientes';
 
+  solicitacaoURL = 'http://localhost:8080/solicitacoes';
   
   provedoresURL = 'http://localhost:8080/provedores';
   provedoresURLFiltro = 'http://localhost:8080/provedores';
@@ -18,8 +19,13 @@ export class CadastroService {
   ) { }
 
 
-  adicionar(cliente: Cliente): Promise<any>{
+  adicionarCliente(cliente: Cliente): Promise<any>{
     return this.http.post(this.clientesURL, cliente)
+    .toPromise();
+  }
+
+  adicionarSolicitacao(solicitacao: Solicitacao): Promise<any>{
+    return this.http.post(this.solicitacaoURL, solicitacao)
     .toPromise();
   }
 

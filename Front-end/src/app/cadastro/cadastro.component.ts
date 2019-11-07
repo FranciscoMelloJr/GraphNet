@@ -17,6 +17,7 @@ export class CadastroComponent implements OnInit {
   zoom: number;
   address: string;
 
+  provedor_id: number;
   filtro: string;
 
   provedores = [];
@@ -41,17 +42,25 @@ export class CadastroComponent implements OnInit {
 
 
   inserir() {
-    console.log("chegou aqui");
     this.cliente.nome = this.nomeFormControl.value;
     this.cliente.email = this.emailFormControl.value;
     this.cliente.telefone = this.telefoneFormControl.value;
     this.cliente.cep = this.cepFormControl.value;
     this.cliente.latitude = this.latitude.toString();
     this.cliente.longitude = this.longitude.toString();
-    this.service.adicionar(this.cliente);
+    this.service.adicionarCliente(this.cliente);
+
+    this.inserirSolicitacao();
   }
 
-  
+  inserirSolicitacao() {
+    this.solicitacao.status = 'Feito.';
+    this.solicitacao.cliente.id = 2;
+    this.solicitacao.provedor.id = this.provedor_id;
+    this.service.adicionarSolicitacao(this.solicitacao);
+  }
+
+
   ngOnInit() {
     this.filtrar();
 

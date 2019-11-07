@@ -23,7 +23,7 @@ export class Provedor{
 
 export class Solicitacao {
     id: number;
-    status: number;
-    provedor_id: number;
-    cliente_id:number;
+    status: string;
+    provedor = new Provedor();
+    cliente = new Cliente();
 }

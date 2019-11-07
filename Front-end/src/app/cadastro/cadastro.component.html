@@ -51,7 +51,7 @@
                         </mat-form-field>
 
                         <mat-form-field class="campo-select">
-                                    <mat-select [(value)]="solicitacao.provedor_id" placeholder="Provedor">
+                                    <mat-select [(value)]="provedor_id" placeholder="Provedor">
                                           <mat-option *ngFor="let pro of provedores" [value]="pro.id">{{pro.nomeFantasia}}</mat-option>
                                     </mat-select>
                         </mat-form-field>

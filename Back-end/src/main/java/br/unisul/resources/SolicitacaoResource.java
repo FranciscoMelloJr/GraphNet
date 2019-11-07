@@ -21,17 +21,11 @@ public class SolicitacaoResource {
 
 	@Autowired
 	private SolicitacaoService service;
-
+	
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)
 	public ResponseEntity<Solicitacao> find(@PathVariable Integer id){
-	Solicitacao obj = service.find(id);
-	return ResponseEntity.ok().body(obj);
-	}
-	
-	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-	public ResponseEntity<Void> delete(@PathVariable Integer id) {
-	service.delete(id);
-	return ResponseEntity.noContent().build();
+		Solicitacao obj = service.find(id);
+		return ResponseEntity.ok().body(obj);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
@@ -40,8 +34,14 @@ public class SolicitacaoResource {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().
 				path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
-	} 
-	
+	}
+
+	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable Integer id) {
+		service.delete(id);
+		return ResponseEntity.noContent().build();
+	}
+		
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<Solicitacao>> findAll() {
 		List<Solicitacao> lista = service.findAll();
