@@ -9,8 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 public class Solicitacao implements Serializable {
 	
@@ -26,7 +24,6 @@ public class Solicitacao implements Serializable {
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
 	
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "provedor_id")
 	private Provedor provedor;
