@@ -14,12 +14,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Provedor implements Serializable {
-	
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
 	private String nomeFantasia;
 	private String razaoSocial;
 	private String cnpj;

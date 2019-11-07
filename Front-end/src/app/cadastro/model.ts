@@ -19,4 +19,11 @@ export class Provedor{
     razaoSocial: string;
     senha: string;
     telefone: string;
-  }
+}
+
+export class Solicitacao {
+    id: number;
+    status: number;
+    provedor_id: number;
+    cliente_id:number;
+}

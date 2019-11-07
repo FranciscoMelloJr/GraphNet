@@ -1,4 +1,4 @@
-import { Cliente, Provedor } from './model';
+import { Cliente, Provedor, Solicitacao } from './model';
 import { FormControl, Validators } from '@angular/forms';
 import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { MapsAPILoader, MouseEvent } from '@agm/core';
@@ -21,28 +21,16 @@ export class CadastroComponent implements OnInit {
 
   provedores = [];
 
-  provedoresAdicionados : Provedor [] = [
-    {cep: "123",
-    cnpj: "123",
-    email: "123",
-      id: 123,
-      nomeFantasia: "123",
-      razaoSocial: "123",
-      senha: "123",
-      telefone: "123"}
-  ];
-
-
   private geoCoder;
 
+  cliente = new Cliente();
 
-
+  solicitacao = new Solicitacao();
 
   
   @ViewChild('search', {static: false})
   public searchElementRef: ElementRef;
   
-  cliente = new Cliente();
 
   constructor(
     private mapsAPILoader: MapsAPILoader,
@@ -52,7 +40,8 @@ export class CadastroComponent implements OnInit {
     private principal: Router) {}
 
 
-  inserir(form: FormControl) {
+  inserir() {
+    console.log("chegou aqui");
     this.cliente.nome = this.nomeFormControl.value;
     this.cliente.email = this.emailFormControl.value;
     this.cliente.telefone = this.telefoneFormControl.value;
@@ -64,6 +53,8 @@ export class CadastroComponent implements OnInit {
 
   
   ngOnInit() {
+    this.filtrar();
+
     this.mapsAPILoader.load().then(() => {
       this.setLocalizacao();
       this.geoCoder = new google.maps.Geocoder;
@@ -155,12 +146,7 @@ export class CadastroComponent implements OnInit {
     this.service.pesquisar(this.filtro)
     .then((dados)=>{
       this.provedores = dados;
-    });
-    
-    console.log(this.provedoresAdicionados);
-    console.log(this.provedores);
-    
-    
+    });    
   }
 
 

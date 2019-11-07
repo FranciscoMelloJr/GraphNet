@@ -10,7 +10,7 @@
             <div fxFlex="nogrow">
                   <mat-card class="fundo">
 
-                  <form class="form" #f="ngForm" (ngSubmit)="inserir(f)">  
+                  <form class="form" #f="ngForm" (ngSubmit)="inserir(f)">
                         
                         <mat-form-field class="campo" appearance="outline">
                               <input matInput placeholder="Nome" [formControl]="nomeFormControl">
@@ -39,7 +39,7 @@
                         </mat-form-field>
 
                         <mat-form-field class="campo" appearance="outline">
-                              <input (keypress)="filtrar()" matInput placeholder="CEP" [formControl]="cepFormControl">
+                              <input (keyup)="filtrar()" matInput placeholder="CEP" [formControl]="cepFormControl">
                               <mat-error *ngIf="cepFormControl.hasError('required')">
                                     O CEP é <strong>obrigatório</strong>
                               </mat-error>
@@ -51,13 +51,13 @@
                         </mat-form-field>
 
                         <mat-form-field class="campo-select">
-                                    <mat-select idplaceholder="Provedor">
-                                          <option *ngFor="let nomeFantasia of provedoresAdicionados" [value]="nomeFantasia">{{nomeFantasia}}</option>
+                                    <mat-select [(value)]="solicitacao.provedor_id" placeholder="Provedor">
+                                          <mat-option *ngFor="let pro of provedores" [value]="pro.id">{{pro.nomeFantasia}}</mat-option>
                                     </mat-select>
                         </mat-form-field>
 
                           
-                        <a type="submit" mat-button class="options">Enviar</a>
+                        <button mat-button type="submit" class="options">Enviar</button>
                   </form>
 
                   </mat-card>
