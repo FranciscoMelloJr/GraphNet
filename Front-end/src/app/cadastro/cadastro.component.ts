@@ -1,5 +1,5 @@
 import { Cliente, Provedor, Solicitacao } from './model';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, Validators, Form, NgForm } from '@angular/forms';
 import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { MapsAPILoader, MouseEvent } from '@agm/core';
 import { CadastroService } from './cadastro.service';
@@ -21,6 +21,8 @@ export class CadastroComponent implements OnInit {
   filtro: string;
 
   provedores = [];
+  clientes = [];
+
 
   private geoCoder;
 
@@ -48,20 +50,30 @@ export class CadastroComponent implements OnInit {
     this.cliente.cep = this.cepFormControl.value;
     this.cliente.latitude = this.latitude.toString();
     this.cliente.longitude = this.longitude.toString();
-    this.service.adicionarCliente(this.cliente);
-
-    this.inserirSolicitacao();
+    this.service.adicionarCliente(this.cliente).then(
+      () => this.inserirSolicitacao());
   }
 
   inserirSolicitacao() {
+    this.carregaClientes();
+
     this.solicitacao.status = 'Feito.';
-    this.solicitacao.cliente.id = 2;
+    this.solicitacao.cliente.id = this.clientes.length + 1;
+    console.log(this.clientes.length);
+    console.log('O id do cliente é ' + this.solicitacao.cliente.id);
     this.solicitacao.provedor.id = this.provedor_id;
     this.service.adicionarSolicitacao(this.solicitacao);
   }
 
-
+  carregaClientes(){
+    this.service.pesquisarClientes()
+    .then((dados)=>{
+      this.clientes = dados;
+    });  
+  }
   ngOnInit() {
+    this.carregaClientes();
+    
     this.filtrar();
 
     this.mapsAPILoader.load().then(() => {

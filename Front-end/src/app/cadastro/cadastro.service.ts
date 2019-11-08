@@ -39,4 +39,8 @@ export class CadastroService {
     return this.http.get<any>(this.provedoresURLFiltro).toPromise();
   }
 
+  pesquisarClientes():Promise<any>{
+    return this.http.get<any>(this.clientesURL).toPromise();
+  }
+
 }
