@@ -31,8 +31,8 @@ public class SolicitacaoService {
 	repo.deleteById(id);
 	}
 
-	public List<Solicitacao> findByProvedor(Integer provedor_id) {
-		return repo.findSolicitacoes(provedor_id);
+	public List<Solicitacao> findByProvedor(Integer provedorId) {
+		return repo.findSolicitacoes(provedorId);
 	}
 	
 	

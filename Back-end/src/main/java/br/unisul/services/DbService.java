@@ -32,12 +32,15 @@ public class DbService {
 		Provedor p1 = new Provedor(null, "Sul Internet", "Sul Telecom SA", "123456789", "88780-000",
 				"(48) 12345-6789", "sul@internet.com", "senha");
 		
+		Provedor p2 = new Provedor(null, "Snet", "Snet Telecom SA", "123456789", "88780-000",
+				"(48) 12345-6789", "snet@internet.com", "senha");
+		
 		Solicitacao s1 = new Solicitacao(null, "");
 		
 		s1.setCliente(c1);
 		s1.setProvedor(p1);
 
-		provedorRepository.saveAll(Arrays.asList(p1));
+		provedorRepository.saveAll(Arrays.asList(p1, p2));
 		
 		clienteRepository.saveAll(Arrays.asList(c1));
 	

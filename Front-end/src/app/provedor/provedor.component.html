@@ -1,1 +1,28 @@
-<p>provedor works!</p>
+<div class="container">
+      Página de Controle Geográfico
+      <div fxLayout
+        fxLayout.lt-lg="column"
+        fxLayoutAlign="center"
+        fxLayoutGap="10px"
+        fxLayoutGap.xs="0">
+
+            <div fxFlex="nogrow">
+                  <mat-card class="fundo-mapa">
+                  <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+                        
+                  </agm-map>
+                  </mat-card>
+            </div>
+            <div fxFlex="nogrow">
+                  <mat-card class="fundo">
+
+                  </mat-card>
+            </div>
+
+            <mat-form-field style="display: none;" class="campo" appearance="outline">
+                  <input value={{address}} matInput placeholder="Endereço"
+                  type="text" (keydown.enter)="$event.preventDefault()" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
+            </mat-form-field>
+    </div>
+</div>
+  

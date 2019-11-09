@@ -58,7 +58,7 @@ export class CadastroComponent implements OnInit {
   inserirSolicitacao() {
     this.carregaClientes();
 
-    this.solicitacao.status = 'Feito.';
+    this.solicitacao.status = 'Cliente Pendente';
     this.solicitacao.cliente.id = this.clientes.length + 1;
     this.solicitacao.provedor.id = this.provedor_id;
     this.service.adicionarSolicitacao(this.solicitacao);
