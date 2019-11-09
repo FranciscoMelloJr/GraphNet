@@ -4,7 +4,8 @@ import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core'
 import { MapsAPILoader, MouseEvent } from '@agm/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProvedorService } from './provedor.service';
-import { Pendente } from './model';
+import { Pendente, Caixa } from './model';
+
 
 @Component({
   selector: 'app-provedor',
@@ -21,9 +22,27 @@ export class ProvedorComponent implements OnInit {
 
   solicitacoes = [];
 
-  pendentes : Pendente [] = [];
+  pendentes: Pendente [] = [];
 
+  caixas: Caixa [] = [];
+  caixasAFilrar: Caixa [] = [];
+
+  iconCaixa = {
+    url: 'https://i.imgur.com/SBOWnk4.png',
+    scaledSize: {
+      width: 40,
+      height: 40
+    }
+  }
   
+  iconCliente = {
+    url: 'https://i.imgur.com/k9Ev7p2.png',
+    scaledSize: {
+      width: 40,
+      height: 40
+    }
+  }
+
   private geoCoder;
 
   
@@ -40,7 +59,6 @@ export class ProvedorComponent implements OnInit {
 
       this.service.listaSolicitacoes(this.id_provedor).then((dados) => this.solicitacoes = dados).then(() => 
       {
-        console.log(this.solicitacoes);
         for (let s of this.solicitacoes){
           this.pendentes.push({
             nome : s.cliente.nome,
@@ -54,8 +72,28 @@ export class ProvedorComponent implements OnInit {
           );
         }
     
-      }).then(() => console.log(this.pendentes));
+      }).then(() => 
+      {
+        this.service.listaCaixas().then((dados) => this.caixasAFilrar = dados).then(() => 
+        {
+          for (let c of this.caixasAFilrar){
+            if (c.provedor.id == this.id_provedor){
+              this.caixas.push({
+                nome : c.nome,
+                latitude : c.latitude,
+                longitude : c.longitude,
+                provedor : c.provedor,
+                solicitacoes : c.solicitacoes
+              })
+            }
+          }
+        }).then(() => console.log(this.caixas));
+      });
 
+
+
+
+      // Google Maps API
       this.mapsAPILoader.load().then(() => {
       this.setLocalizacao();
       this.geoCoder = new google.maps.Geocoder;

@@ -62,7 +62,7 @@ import { AuthService } from './login-provedor/auth.service';
     MatSelectModule,
     HttpClientModule,
     AgmCoreModule.forRoot({
-      apiKey: '(Colocar a chave de API aqui)',
+      apiKey: 'AIzaSyDletuV24cctF2jCRNOlL2yMqGyHwfZjO8',
       libraries: ['geometry', 'places']
     })
   ],

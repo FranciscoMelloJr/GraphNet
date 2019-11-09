@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Solicitacao implements Serializable {
 	
@@ -31,9 +33,10 @@ public class Solicitacao implements Serializable {
 	@JoinColumn(name = "provedor_id")
 	private Provedor provedor;
 
-	/* @ManyToOne
+	@JsonIgnore
+	@ManyToOne
 	@JoinColumn(name = "caixa_id")
-	private Caixa caixa; */
+	private Caixa caixa;
 	
 	public Solicitacao() {}
 
@@ -112,6 +115,14 @@ public class Solicitacao implements Serializable {
 
 	public void setData(Date data) {
 		this.data = data;
+	}
+
+	public Caixa getCaixa() {
+		return caixa;
+	}
+
+	public void setCaixa(Caixa caixa) {
+		this.caixa = caixa;
 	}
 	
 }

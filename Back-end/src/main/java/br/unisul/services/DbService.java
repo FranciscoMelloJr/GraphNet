@@ -7,9 +7,11 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.unisul.domain.Caixa;
 import br.unisul.domain.Cliente;
 import br.unisul.domain.Provedor;
 import br.unisul.domain.Solicitacao;
+import br.unisul.repositories.CaixaRepository;
 import br.unisul.repositories.ClienteRepository;
 import br.unisul.repositories.ProvedorRepository;
 import br.unisul.repositories.SolicitacaoRepository;
@@ -26,6 +28,9 @@ public class DbService {
 	@Autowired
 	private SolicitacaoRepository solicitacaoRepository;
 	
+	@Autowired
+	private CaixaRepository caixaRepository;
+	
 	public void inicializaBancoDeDados() throws ParseException {
 		
 		Date data = new Date();
@@ -40,15 +45,25 @@ public class DbService {
 		
 		Solicitacao s1 = new Solicitacao(null, "");
 		
+		Caixa ca1 = new Caixa(null, "Caixa 1", "20", "20");
+		
 		s1.setCliente(c1);
 		s1.setProvedor(p1);
 		s1.setData(data);
-
+		
 		provedorRepository.saveAll(Arrays.asList(p1, p2));
+		
+		ca1.setProvedor(p1);
+
+		caixaRepository.saveAll(Arrays.asList(ca1));
+		
+		s1.setCaixa(ca1);
+		
 		
 		clienteRepository.saveAll(Arrays.asList(c1));
 	
 		solicitacaoRepository.saveAll(Arrays.asList(s1));
+		
 	}
 	
 }
