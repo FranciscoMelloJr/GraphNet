@@ -16,6 +16,8 @@ export class LoginProvedorComponent implements OnInit {
   provedor = new Provedor();
   provedorEncontrado = new Provedor();
 
+  id_provedor = JSON.parse(localStorage.getItem('provedor'));
+
   autenticado: boolean = false;
 
   constructor(
@@ -25,7 +27,12 @@ export class LoginProvedorComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    if (this.id_provedor > 0){
+      this.autenticado = true;
+      this.authService.fazerLogin(this.autenticado);
+    } else {
+      this.autenticado = false;
+    }
   }
 
   fazerLogin(){
