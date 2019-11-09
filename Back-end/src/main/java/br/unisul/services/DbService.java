@@ -32,7 +32,7 @@ public class DbService {
 		Provedor p1 = new Provedor(null, "Sul Internet", "Sul Telecom SA", "123456789", "88780-000",
 				"(48) 12345-6789", "sul@internet.com", "senha");
 		
-		Provedor p2 = new Provedor(null, "Snet", "Snet Telecom SA", "123456789", "88780-000",
+		Provedor p2 = new Provedor(null, "Snet", "Snet Telecom SA", "987654321", "88780-000",
 				"(48) 12345-6789", "snet@internet.com", "senha");
 		
 		Solicitacao s1 = new Solicitacao(null, "");

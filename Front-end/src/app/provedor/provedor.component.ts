@@ -4,6 +4,7 @@ import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core'
 import { MapsAPILoader, MouseEvent } from '@agm/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProvedorService } from './provedor.service';
+import { Pendente } from './model';
 
 @Component({
   selector: 'app-provedor',
@@ -18,7 +19,9 @@ export class ProvedorComponent implements OnInit {
   
   id_provedor = JSON.parse(localStorage.getItem('provedor'));
 
+  solicitacoes = [];
 
+  pendentes : Pendente [] = [];
 
   
   private geoCoder;
@@ -35,7 +38,22 @@ export class ProvedorComponent implements OnInit {
 
   ngOnInit() {
 
-      this.service.listaSolicitacoes(this.id_provedor);
+      this.service.listaSolicitacoes(this.id_provedor).then((dados) => this.solicitacoes = dados).then(() => 
+      {
+        console.log(this.solicitacoes);
+        for (let s of this.solicitacoes){
+          this.pendentes.push({
+            nome : s.cliente.nome,
+            latitude : Number(s.cliente.latitude),
+            longitude : Number(s.cliente.longitude),
+            cpf : s.cliente.cpf,
+            telefone: s.cliente.telefone,
+            email: s.cliente.email
+          }
+          );
+        }
+    
+      }).then(() => console.log(this.pendentes));
 
       this.mapsAPILoader.load().then(() => {
       this.setLocalizacao();
@@ -57,7 +75,7 @@ export class ProvedorComponent implements OnInit {
           // Setando Latitude, Longitude e o Zoom
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
-          this.zoom = 12;
+          this.zoom = 5;
         });
       });
     });
