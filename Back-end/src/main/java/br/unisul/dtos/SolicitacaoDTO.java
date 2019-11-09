@@ -1,6 +1,7 @@
 package br.unisul.dtos;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import br.unisul.domain.Solicitacao;
 
@@ -11,6 +12,8 @@ public class SolicitacaoDTO implements Serializable {
 	private Integer id;
 	
 	private String status;	
+
+	private Date data;
 	
 	public SolicitacaoDTO() {}
 
@@ -38,6 +41,14 @@ public class SolicitacaoDTO implements Serializable {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
 	}
 	
 }

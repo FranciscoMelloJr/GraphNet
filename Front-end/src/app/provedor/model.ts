@@ -5,4 +5,5 @@ export class Pendente{
     cpf: string;
     telefone: string;
     email: string;
+    data: Date;
 }

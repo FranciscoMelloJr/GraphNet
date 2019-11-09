@@ -2,6 +2,7 @@ package br.unisul.services;
 
 import java.text.ParseException;
 import java.util.Arrays;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,8 @@ public class DbService {
 	
 	public void inicializaBancoDeDados() throws ParseException {
 		
+		Date data = new Date();
+
 		Cliente c1 = new Cliente(null, "Lucas", "lucas@gmail.com", "(48) 12345-6789", "88780-000", "123456789101", "", "");
 
 		Provedor p1 = new Provedor(null, "Sul Internet", "Sul Telecom SA", "123456789", "88780-000",
@@ -39,6 +42,7 @@ public class DbService {
 		
 		s1.setCliente(c1);
 		s1.setProvedor(p1);
+		s1.setData(data);
 
 		provedorRepository.saveAll(Arrays.asList(p1, p2));
 		

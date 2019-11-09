@@ -1,6 +1,7 @@
 package br.unisul.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,6 +20,8 @@ public class Solicitacao implements Serializable {
 	private Integer id;
 	
 	private String status;	
+	
+	private Date data;
 	
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
@@ -102,8 +105,14 @@ public class Solicitacao implements Serializable {
 	public void setProvedor(Provedor provedor) {
 		this.provedor = provedor;
 	}
-	
-	
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
 	
 }
 		

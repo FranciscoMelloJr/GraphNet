@@ -2,7 +2,6 @@ package br.unisul.resources;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import br.unisul.domain.Provedor;
 import br.unisul.domain.Solicitacao;
 import br.unisul.dtos.ProvedorDTO;
-import br.unisul.dtos.SolicitacaoDTO;
 import br.unisul.resources.utils.URL;
 import br.unisul.services.ProvedorService;
 import br.unisul.services.SolicitacaoService;

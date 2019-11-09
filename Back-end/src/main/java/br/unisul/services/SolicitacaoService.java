@@ -1,5 +1,6 @@
 package br.unisul.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,7 +38,9 @@ public class SolicitacaoService {
 	
 	
 	public Solicitacao insert(Solicitacao obj) {
+		Date data = new Date();
 		obj.setId(null);
+		obj.setData(data);
 		obj.setCliente(clienteService.find(obj.getCliente().getId()));
 		obj.setProvedor(provedorService.find(obj.getProvedor().getId()));
 		obj = repo.save(obj);

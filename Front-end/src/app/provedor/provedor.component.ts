@@ -48,7 +48,8 @@ export class ProvedorComponent implements OnInit {
             longitude : Number(s.cliente.longitude),
             cpf : s.cliente.cpf,
             telefone: s.cliente.telefone,
-            email: s.cliente.email
+            email: s.cliente.email,
+            data: s.data
           }
           );
         }
