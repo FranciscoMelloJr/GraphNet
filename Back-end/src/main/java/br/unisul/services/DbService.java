@@ -45,7 +45,7 @@ public class DbService {
 		
 		Solicitacao s1 = new Solicitacao(null, "");
 		
-		Caixa ca1 = new Caixa(null, "Caixa 1", "", "");
+		Caixa ca1 = new Caixa(null, "Caixa 1", "20", "20");
 		
 		s1.setCliente(c1);
 		s1.setProvedor(p1);

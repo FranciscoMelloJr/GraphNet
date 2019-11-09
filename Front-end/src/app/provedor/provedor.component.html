@@ -9,13 +9,20 @@
             <div fxFlex="nogrow">
                   <mat-card class="fundo-mapa">
                   <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
-                        <agm-marker *ngFor="let p of pendentes" [latitude]="p.latitude" [longitude]="p.longitude"> 
+                        <agm-marker [iconUrl]="iconCliente" *ngFor="let p of pendentes" [latitude]="p.latitude" [longitude]="p.longitude"> 
                               <agm-info-window>
                                     <p>Nome: {{p.nome}}</p>
                                     <p>CPF: {{p.cpf}}</p>
                                     <p>Telefone: {{p.telefone}}</p>
                                     <p>E-mail: {{p.email}}</p>
                                     <p>Data de cadastro: {{p.data | date:'dd/MM/yyyy'}}</p>
+                              </agm-info-window>
+                        </agm-marker>
+
+                        <agm-marker [iconUrl]="iconCaixa" *ngFor="let c of caixas" [latitude]="c.latitude" [longitude]="c.longitude"> 
+                              <agm-info-window>
+                                    <p>Caixa de Distribuição</p>
+                                    <p>Nome: {{c.nome}}</p>
                               </agm-info-window>
                         </agm-marker>
                   </agm-map>

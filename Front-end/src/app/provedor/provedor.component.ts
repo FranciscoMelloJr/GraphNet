@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProvedorService } from './provedor.service';
 import { Pendente, Caixa } from './model';
 
+
 @Component({
   selector: 'app-provedor',
   templateUrl: './provedor.component.html',
@@ -26,7 +27,22 @@ export class ProvedorComponent implements OnInit {
   caixas: Caixa [] = [];
   caixasAFilrar: Caixa [] = [];
 
+  iconCaixa = {
+    url: 'https://i.imgur.com/SBOWnk4.png',
+    scaledSize: {
+      width: 40,
+      height: 40
+    }
+  }
   
+  iconCliente = {
+    url: 'https://i.imgur.com/k9Ev7p2.png',
+    scaledSize: {
+      width: 40,
+      height: 40
+    }
+  }
+
   private geoCoder;
 
   
