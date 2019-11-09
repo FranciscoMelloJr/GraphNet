@@ -16,7 +16,7 @@ import br.unisul.domain.Analise;
 import br.unisul.services.AnaliseService;
 
 @RestController
-@RequestMapping(value="/analise")
+@RequestMapping(value="/analises")
 public class AnaliseResource {
 
 	@Autowired
