@@ -35,6 +35,10 @@ public class Provedor implements Serializable {
 	@JsonIgnore
 	@OneToMany (mappedBy="provedor")
 	private List<Caixa> caixas = new ArrayList<>();
+	
+	@JsonIgnore
+	@OneToMany (mappedBy="provedor")
+	private List<Analise> analises = new ArrayList<>();
 
 	public Provedor() {
 	}	
