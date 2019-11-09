@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { Validators, FormControl } from '@angular/forms';
 import { Provedor } from './model';
 import { LoginProvedorService } from './login-provedor.service';
+import { Router } from '@angular/router';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-login-provedor',
@@ -12,11 +14,14 @@ export class LoginProvedorComponent implements OnInit {
 
   
   provedor = new Provedor();
-
   provedorEncontrado = new Provedor();
 
+  autenticado: boolean = false;
+
   constructor(
-    private service: LoginProvedorService
+    private router: Router,
+    private service: LoginProvedorService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -30,13 +35,17 @@ export class LoginProvedorComponent implements OnInit {
     this.service.pesquisar(this.provedor.cnpj)
     .then((dados)=>{
       this.provedorEncontrado = dados;
-    });
-
-    if (this.provedorEncontrado.senha == this.provedor.senha){
+    }).then(()=> {
+      if (this.provedorEncontrado.senha == this.provedor.senha){
       // Só entra aqui se a senha for verificada
       localStorage.setItem('provedor', '' + this.provedorEncontrado.id);
+      this.autenticado = true;
+      this.authService.fazerLogin(this.autenticado);
+    } else {
+      this.autenticado = false;
+    }});
 
-    }
+   
   }
 
   cnpjFormControl = new FormControl('', [

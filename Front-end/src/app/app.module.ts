@@ -26,6 +26,8 @@ import { CadastroProvedorComponent } from './cadastro-provedor/cadastro-provedor
 import { AgmCoreModule } from '@agm/core';
 import { LoginProvedorComponent } from './login-provedor/login-provedor.component';
 import { ProvedorComponent } from './provedor/provedor.component';
+import { AuthGuard } from './guards/auth.guard';
+import { AuthService } from './login-provedor/auth.service';
 
 
 
@@ -67,7 +69,7 @@ import { ProvedorComponent } from './provedor/provedor.component';
   exports:[
     RouterModule
   ],
-  providers: [],
+  providers: [AuthGuard, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
