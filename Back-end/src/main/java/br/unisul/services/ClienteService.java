@@ -38,4 +38,9 @@ public class ClienteService {
 	public List<Cliente> findAll(){
 		return repo.findAll();
 	}
+
+	public Cliente findByCpf(String cpf) {
+		List<Cliente> cliente = repo.findByCpf(cpf);
+		return cliente.stream().findFirst().orElse(null);
+	}
 }

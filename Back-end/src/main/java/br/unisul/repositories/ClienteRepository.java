@@ -14,4 +14,7 @@ public interface ClienteRepository  extends JpaRepository<Cliente, Integer> {
 	@Transactional(readOnly=true)
 	public List<Cliente> findAllByOrderByNome();
 	
+	@Transactional(readOnly = true)
+	public List<Cliente> findByCpf(String cpf);
+	
 }

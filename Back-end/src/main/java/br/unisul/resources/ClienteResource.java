@@ -56,4 +56,10 @@ public class ClienteResource {
 		return ResponseEntity.ok().body(listDto);
 	}
 	
+	@RequestMapping(value = "/{cpf}", method = RequestMethod.GET)
+	public ResponseEntity<Cliente> findByCpf(@PathVariable String cpf) {
+		Cliente cliente = service.findByCpf(cpf);
+		return ResponseEntity.ok().body(cliente);
+	}
+	
 }
