@@ -7,7 +7,8 @@ import { HttpClient } from '@angular/common/http';
 export class ProvedorService {
 
   provedoresURL = 'http://localhost:8080/provedores';
-  provedoresURLFiltro = 'http://localhost:8080/provedores';
+
+  caixasURL = 'http://localhost:8080/caixas';
 
   constructor(
     private http: HttpClient
@@ -15,6 +16,10 @@ export class ProvedorService {
 
   listaSolicitacoes(id_provedor: any):Promise<any>{
     return this.http.get<any>(this.provedoresURL + '/' + id_provedor + '/solicitacoes').toPromise();
+  }
+
+  listaCaixas():Promise<any>{
+    return this.http.get<any>(this.caixasURL).toPromise();
   }
 
 }

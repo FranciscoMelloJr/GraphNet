@@ -31,6 +31,10 @@ public class Provedor implements Serializable {
 	@JsonIgnore
 	@OneToMany (mappedBy="provedor")
 	private List<Solicitacao> solicitacoes = new ArrayList<>();
+	
+	@JsonIgnore
+	@OneToMany (mappedBy="provedor")
+	private List<Caixa> caixas = new ArrayList<>();
 
 	public Provedor() {
 	}	
@@ -155,7 +159,13 @@ public class Provedor implements Serializable {
 	public void setSolicitacoes(List<Solicitacao> solicitacoes) {
 		this.solicitacoes = solicitacoes;
 	}
-	
-	
+
+	public List<Caixa> getCaixas() {
+		return caixas;
+	}
+
+	public void setCaixas(List<Caixa> caixas) {
+		this.caixas = caixas;
+	}
 	
 }
