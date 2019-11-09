@@ -46,6 +46,13 @@
                         </mat-form-field>
 
                         <mat-form-field class="campo" appearance="outline">
+                              <input matInput placeholder="CPF" [formControl]="cpfFormControl">
+                              <mat-error *ngIf="cpfFormControl.hasError('required')">
+                                    O CPF é <strong>obrigatório</strong>
+                              </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="campo" appearance="outline">
                               <input value={{address}} matInput placeholder="Endereço"
                               type="text" (keydown.enter)="$event.preventDefault()" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
                         </mat-form-field>

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.unisul.domain.Provedor;
+import br.unisul.dtos.ProvedorDTO;
 
 @Repository
 public interface ProvedorRepository  extends JpaRepository<Provedor, Integer> {
@@ -15,5 +16,7 @@ public interface ProvedorRepository  extends JpaRepository<Provedor, Integer> {
 	public List<Provedor> findAllByOrderByNomeFantasia();
 
 	List<Provedor> findDistinctByCepOrderByCep(String cep);
+	
+	ProvedorDTO findDistinctByCnpjOrderByCnpj(String cnpj);
 	
 }

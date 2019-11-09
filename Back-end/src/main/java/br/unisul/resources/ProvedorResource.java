@@ -56,4 +56,15 @@ public class ProvedorResource {
 		return ResponseEntity.ok().body(listDto);
 	}
 	
+	@RequestMapping(value = "/filtroCnpj", method = RequestMethod.GET)
+	public ResponseEntity<ProvedorDTO> findCnpj(
+			@RequestParam(value = "cnpj", defaultValue = "") String cnpj
+		){
+			
+	String cnpjDecoded = URL.decodeParam(cnpj);
+	ProvedorDTO provedor = service.searchCnpj(cnpjDecoded);
+	return ResponseEntity.ok().body(provedor);
+	
+	}
+	
 }

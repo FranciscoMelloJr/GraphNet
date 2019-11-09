@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.unisul.domain.Provedor;
+import br.unisul.dtos.ProvedorDTO;
 import br.unisul.repositories.ProvedorRepository;
 
 @Service
@@ -26,6 +27,10 @@ public class ProvedorService {
 	
 	public List<Provedor> search (String cep){
 		return repo.findDistinctByCepOrderByCep(cep);
+	}
+	
+	public ProvedorDTO searchCnpj (String cnpj){
+		return repo.findDistinctByCnpjOrderByCnpj(cnpj);
 	}
 	
 }

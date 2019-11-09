@@ -14,14 +14,20 @@
                             <h4 style="color: #3d3d3d">Digite as suas informações:</h4>
 
                             <mat-form-field class="campo" appearance="outline">
-                              <input matInput [(ngModel)]="provedor.cnpj" name="cnpj" id="cnpj" class="form-control" placeholder="CNPJ">
-                            </mat-form-field>
+                                    <input matInput placeholder="CNPJ" [formControl]="cnpjFormControl">
+                                    <mat-error *ngIf="cnpjFormControl.hasError('required')">
+                                          O CNPJ é <strong>obrigatório</strong>
+                                    </mat-error>
+                              </mat-form-field>
 
-                            <mat-form-field class="campo" appearance="outline">
-                              <input type="password" matInput [(ngModel)]="provedor.senha" name="senha" id="senha" class="form-control" placeholder="Senha">
-                            </mat-form-field>
+                              <mat-form-field class="campo" appearance="outline">
+                                    <input matInput type="password" placeholder="Senha" [formControl]="senhaFormControl">
+                                    <mat-error *ngIf="senhaFormControl.hasError('required')">
+                                          A senha é <strong>obrigatória</strong>
+                                    </mat-error>
+                              </mat-form-field>
 
-                            <a mat-button class="options" (click)="fazerLogin()">Enviar</a>
+                            <a mat-button class="options" (click)="fazerLogin()">Login</a>
                       </form>
                 </mat-card>
           </div>

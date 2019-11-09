@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Provedor } from './model';
+import { LoginProvedorService } from './login-provedor.service';
 
 @Component({
   selector: 'app-login-provedor',
@@ -10,15 +11,40 @@ import { Provedor } from './model';
 export class LoginProvedorComponent implements OnInit {
 
   
-  provedor: Provedor = new Provedor();
+  provedor = new Provedor();
 
-  constructor() { }
+  provedorEncontrado = new Provedor();
+
+  constructor(
+    private service: LoginProvedorService
+  ) { }
 
   ngOnInit() {
 
   }
 
   fazerLogin(){
+    this.provedor.cnpj = this.cnpjFormControl.value;
+    this.provedor.senha = this.senhaFormControl.value;
+
+    this.service.pesquisar(this.provedor.cnpj)
+    .then((dados)=>{
+      this.provedorEncontrado = dados;
+    });
+
+    if (this.provedorEncontrado.senha == this.provedor.senha){
+      // Só entra aqui se a senha for verificada
+      localStorage.setItem('provedor', '' + this.provedorEncontrado.id);
+
+    }
   }
+
+  cnpjFormControl = new FormControl('', [
+    Validators.required
+  ]);
+  
+  senhaFormControl = new FormControl('', [
+    Validators.required
+  ]);
 
 }

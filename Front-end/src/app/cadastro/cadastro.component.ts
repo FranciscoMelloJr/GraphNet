@@ -48,6 +48,7 @@ export class CadastroComponent implements OnInit {
     this.cliente.email = this.emailFormControl.value;
     this.cliente.telefone = this.telefoneFormControl.value;
     this.cliente.cep = this.cepFormControl.value;
+    this.cliente.cpf = this.cpfFormControl.value;
     this.cliente.latitude = this.latitude.toString();
     this.cliente.longitude = this.longitude.toString();
     this.service.adicionarCliente(this.cliente).then(
@@ -59,8 +60,6 @@ export class CadastroComponent implements OnInit {
 
     this.solicitacao.status = 'Feito.';
     this.solicitacao.cliente.id = this.clientes.length + 1;
-    console.log(this.clientes.length);
-    console.log('O id do cliente é ' + this.solicitacao.cliente.id);
     this.solicitacao.provedor.id = this.provedor_id;
     this.service.adicionarSolicitacao(this.solicitacao);
   }
@@ -116,6 +115,10 @@ export class CadastroComponent implements OnInit {
   ]);
 
   cepFormControl = new FormControl('', [
+    Validators.required
+  ]);
+
+  cpfFormControl = new FormControl('', [
     Validators.required
   ]);
 

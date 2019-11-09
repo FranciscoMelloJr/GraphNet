@@ -60,7 +60,7 @@ import { ProvedorComponent } from './provedor/provedor.component';
     MatSelectModule,
     HttpClientModule,
     AgmCoreModule.forRoot({
-      apiKey: '(Colocar a chave de API aqui)',
+      apiKey: 'AIzaSyD5fqlPqe0mJE15fiWEqyxUkwNnMCacSRg',
       libraries: ['geometry', 'places']
     })
   ],
