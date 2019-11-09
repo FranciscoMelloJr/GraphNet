@@ -4,7 +4,7 @@ import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core'
 import { MapsAPILoader, MouseEvent } from '@agm/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProvedorService } from './provedor.service';
-import { Pendente, Caixa } from './model';
+import { Pendente, Caixa, Linha } from './model';
 
 
 @Component({
@@ -21,6 +21,8 @@ export class ProvedorComponent implements OnInit {
   id_provedor = JSON.parse(localStorage.getItem('provedor'));
 
   solicitacoes = [];
+
+  linhas : Linha [] = [];
 
   pendentes: Pendente [] = [];
 
@@ -87,7 +89,18 @@ export class ProvedorComponent implements OnInit {
               })
             }
           }
-        }).then(() => console.log(this.caixas));
+        }).then(() => console.log(this.caixas)).then(() => {
+          for (let c of this.caixas) {
+            for (let soli of c.solicitacoes){
+              this.linhas.push({
+                inicioLat : Number(c.latitude),
+                inicioLng : Number(c.longitude),
+                fimLat : Number(soli.cliente.latitude),
+                fimLng : Number(soli.cliente.longitude)
+              })
+            }
+          }
+        }).then(() => console.log(this.linhas));
       });
 
 
@@ -114,7 +127,7 @@ export class ProvedorComponent implements OnInit {
           // Setando Latitude, Longitude e o Zoom
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
-          this.zoom = 5;
+          this.zoom = 15;
         });
       });
     });
@@ -129,5 +142,6 @@ export class ProvedorComponent implements OnInit {
       });
     }
   }
+  
 
 }

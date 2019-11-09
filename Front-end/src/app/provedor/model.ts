@@ -42,6 +42,14 @@ export class Provedor{
 export class Solicitacao {
     id: number;
     status: string;
+    data: Date;
     provedor = new Provedor();
     cliente = new Cliente();
+}
+
+export class Linha {
+    inicioLat: number;
+    inicioLng: number;
+    fimLat: number;
+    fimLng: number;
 }

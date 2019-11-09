@@ -11,18 +11,26 @@
                   <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
                         <agm-marker [iconUrl]="iconCliente" *ngFor="let p of pendentes" [latitude]="p.latitude" [longitude]="p.longitude"> 
                               <agm-info-window>
-                                    <p>Nome: {{p.nome}}</p>
-                                    <p>CPF: {{p.cpf}}</p>
-                                    <p>Telefone: {{p.telefone}}</p>
-                                    <p>E-mail: {{p.email}}</p>
-                                    <p>Data de cadastro: {{p.data | date:'dd/MM/yyyy'}}</p>
+                                    <p><strong>Nome:</strong> {{p.nome}}</p>
+                                    <p><strong>CPF:</strong> {{p.cpf}}</p>
+                                    <p><strong>Telefone:</strong> {{p.telefone}}</p>
+                                    <p><strong>E-mail:</strong> {{p.email}}</p>
+                                    <p><strong>Data de cadastro:</strong> {{p.data | date:'dd/MM/yyyy'}}</p>
                               </agm-info-window>
                         </agm-marker>
 
+                        <agm-polyline  *ngFor="let l of linhas" [strokeOpacity]="0.8" [strokeWeight]="1" [strokeColor]="'blue'">
+                              <agm-polyline-point [latitude]="l.inicioLat" [longitude]="l.inicioLng">
+                              </agm-polyline-point>
+
+                              <agm-polyline-point [latitude]="l.fimLat" [longitude]="l.fimLng">
+                              </agm-polyline-point>
+                        </agm-polyline>
+                        
                         <agm-marker [iconUrl]="iconCaixa" *ngFor="let c of caixas" [latitude]="c.latitude" [longitude]="c.longitude"> 
                               <agm-info-window>
-                                    <p>Caixa de Distribuição</p>
-                                    <p>Nome: {{c.nome}}</p>
+                                    <p><strong>Caixa de Distribuição</strong></p>
+                                    <p><strong>Nome:</strong> {{c.nome}}</p>
                               </agm-info-window>
                         </agm-marker>
                   </agm-map>

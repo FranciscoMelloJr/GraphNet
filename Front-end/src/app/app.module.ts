@@ -63,7 +63,7 @@ import { AuthService } from './login-provedor/auth.service';
     HttpClientModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDletuV24cctF2jCRNOlL2yMqGyHwfZjO8',
-      libraries: ['geometry', 'places']
+      libraries: ['geometry', 'places', 'directions']
     })
   ],
   exports:[
