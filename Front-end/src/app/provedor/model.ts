@@ -45,8 +45,10 @@ export class Solicitacao {
     id: number;
     status: string;
     data: Date;
+    caixa = new Caixa();
     provedor = new Provedor();
     cliente = new Cliente();
+    addCaixa : number;
 }
 
 export class Linha {

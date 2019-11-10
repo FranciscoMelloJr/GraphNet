@@ -22,6 +22,9 @@ public class SolicitacaoService {
 	@Autowired
 	private ProvedorService provedorService;
 	
+	@Autowired
+	private CaixaService caixaService;
+	
 	public Solicitacao find (Integer id) {
 		Optional<Solicitacao> obj = repo.findById(id);
 		return obj.orElse(null);
@@ -30,6 +33,13 @@ public class SolicitacaoService {
 	public void delete (Integer id) {
 	find(id);
 	repo.deleteById(id);
+	}
+	
+	public Solicitacao update(Solicitacao obj) {
+		Solicitacao newObj = find(obj.getId());
+		newObj.setStatus(obj.getStatus());
+		newObj.setCaixa(caixaService.find(obj.getAddCaixa()));
+		return repo.save(newObj);
 	}
 
 	public List<Solicitacao> findByProvedor(Integer provedorId) {
@@ -50,4 +60,5 @@ public class SolicitacaoService {
 	public List<Solicitacao> findAll() {
 		return repo.findAll();
 	}
+	
 }

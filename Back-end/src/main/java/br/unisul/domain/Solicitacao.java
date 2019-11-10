@@ -24,6 +24,8 @@ public class Solicitacao implements Serializable {
 	private String status;	
 	
 	private Date data;
+
+	private Integer addCaixa;
 	
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
@@ -50,7 +52,14 @@ public class Solicitacao implements Serializable {
 		status = s.getStatus();
 	}
 
-	
+
+	public Integer getAddCaixa() {
+		return addCaixa;
+	}
+
+	public void setAddCaixa(Integer addCaixa) {
+		this.addCaixa = addCaixa;
+	}
 	
 	@Override
 	public int hashCode() {

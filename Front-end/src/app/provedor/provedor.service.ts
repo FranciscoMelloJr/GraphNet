@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Solicitacao } from './model';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,17 @@ export class ProvedorService {
     return this.http.delete(this.solicitacoesURL + '/' + id)
     .toPromise()
     .then(() => null);
+  }
+
+  removeCaixa(id: number):Promise<void>{
+    return this.http.delete(this.caixasURL + '/' + id)
+    .toPromise()
+    .then(() => null);
+  }
+
+  alterar(solicitacao: Solicitacao): Promise<any>{
+    return this.http.put(this.solicitacoesURL+'/'+solicitacao.id, solicitacao)
+    .toPromise();
   }
 
 }

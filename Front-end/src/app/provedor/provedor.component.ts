@@ -4,7 +4,7 @@ import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core'
 import { MapsAPILoader, MouseEvent } from '@agm/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProvedorService } from './provedor.service';
-import { Pendente, Caixa, Linha, Cliente } from './model';
+import { Pendente, Caixa, Linha, Cliente, Solicitacao } from './model';
 
 
 @Component({
@@ -22,10 +22,8 @@ export class ProvedorComponent implements OnInit {
 
   selecionado : number;
 
-  solicitacoes = [];
-
+  solicitacoes : Solicitacao [] = [];
   linhas : Linha [] = [];
-
   clientes: Pendente [] = [];
 
   pendentesVerde: Pendente [] = [];
@@ -36,6 +34,35 @@ export class ProvedorComponent implements OnInit {
 
   caixas: Caixa [] = [];
   caixasAFilrar: Caixa [] = [];
+
+  // Variáveis para adicionar um cliente pendente a uma caixa
+  caixaSelecionada: number;
+  solicitacaoEnviar: Solicitacao = new Solicitacao();
+  idCli: number;
+  nomeCli: string;
+  cpfCli: string;
+  telefoneCli: string;
+  emailCli: string;
+
+  private addCli(){
+    for (let s of this.solicitacoes){
+      if (s.cliente.id == this.idCli){
+        this.solicitacaoEnviar.id = s.id;
+        this.solicitacaoEnviar.cliente = s.cliente;
+        this.solicitacaoEnviar.data = s.data;
+        this.solicitacaoEnviar.provedor = s.provedor;
+        this.solicitacaoEnviar.addCaixa = this.caixaSelecionada;
+        this.solicitacaoEnviar.status = "";
+        console.log(this.solicitacaoEnviar)
+        
+        this.service.alterar(this.solicitacaoEnviar).then(() => {
+          this.redirectTo('/provedor');
+        });
+        
+      }
+    }
+  }
+
 
   iconCaixa = {
     url: 'https://i.imgur.com/SBOWnk4.png',
@@ -94,7 +121,8 @@ export class ProvedorComponent implements OnInit {
       {
         for (let s of this.solicitacoes){
           if (s.status == 'Pendente'){
-            if (Number(this.data.getMonth() + 1) - Number(s.data.substring(5,7) < 3)){
+          let newDate = new Date(s.data);
+            if (this.data.getDate() - newDate.getTime() < this.data.getDate() - 60){
               this.pendentesVerde.push({
                 id : s.cliente.id,
                 nome : s.cliente.nome,
@@ -106,7 +134,7 @@ export class ProvedorComponent implements OnInit {
                 data: s.data
               }
               );
-            } else if (Number(this.data.getMonth() + 1) - Number(s.data.substring(5,7) < 6)) {
+            } else if (this.data.getDate() - s.data.getDate() < this.data.getDate() - 180) {
               this.pendentesLaranja.push({
                 id : s.cliente.id,
                 nome : s.cliente.nome,
@@ -221,8 +249,25 @@ export class ProvedorComponent implements OnInit {
     this.redirectTo('/provedor'));
   }
 
+  private removeCaixa(id: number){
+    this.service.removeCaixa(id).then(()=>
+    this.redirectTo('/provedor'));
+  }
   redirectTo(uri:string){
     this.router.navigateByUrl('/login', {skipLocationChange: true}).then(()=>
-    this.router.navigate([uri]));}
+    this.router.navigate([uri]));
+  }
+
+  private mostraAddCli(p: Pendente){
+    const el: HTMLElement = document.getElementById('addCli');
+    this.idCli = p.id;
+    this.nomeCli = p.nome;
+    this.cpfCli = p.cpf;
+    this.telefoneCli = p.cpf;
+    this.emailCli = p.email;
+
+    el.style.display = 'block';
+
+  }
 
 }

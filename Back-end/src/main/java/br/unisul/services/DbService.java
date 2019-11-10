@@ -48,6 +48,7 @@ public class DbService {
 		Solicitacao s2 = new Solicitacao(null, "");
 		
 		Caixa ca1 = new Caixa(null, "Caixa 1", "-49.51875310058597", "-28.933190306812516");
+		Caixa ca2 = new Caixa(null, "Caixa 2", "-49.51248746032718", "-28.94025112836157");
 		
 		s1.setCliente(c1);
 		s1.setProvedor(p1);
@@ -59,8 +60,9 @@ public class DbService {
 		provedorRepository.saveAll(Arrays.asList(p1, p2));
 		
 		ca1.setProvedor(p1);
+		ca2.setProvedor(p1);
 
-		caixaRepository.saveAll(Arrays.asList(ca1));
+		caixaRepository.saveAll(Arrays.asList(ca1, ca2));
 		
 		s1.setCaixa(ca1);
 		s2.setCaixa(ca1);

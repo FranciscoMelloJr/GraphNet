@@ -3,6 +3,8 @@ package br.unisul.resources;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,6 +36,13 @@ public class SolicitacaoResource {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().
 				path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
+	}
+	
+	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
+	public ResponseEntity<Void> update(@Valid @RequestBody Solicitacao obj, @PathVariable Integer id){
+		obj.setId(id);
+		obj = service.update(obj);
+		return ResponseEntity.noContent().build();
 	}
 
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
