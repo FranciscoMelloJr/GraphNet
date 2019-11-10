@@ -39,8 +39,7 @@ export class CadastroComponent implements OnInit {
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
     private service: CadastroService,
-    private rota: ActivatedRoute,
-    private principal: Router) {}
+    private router: Router) {}
 
 
   inserir() {
@@ -61,7 +60,9 @@ export class CadastroComponent implements OnInit {
     this.solicitacao.status = 'Pendente';
     this.solicitacao.cliente.id = this.clientes.length + 1;
     this.solicitacao.provedor.id = this.provedor_id;
-    this.service.adicionarSolicitacao(this.solicitacao);
+    this.service.adicionarSolicitacao(this.solicitacao).then(() => {
+      this.redirectTo('/cadastro');
+    });
   }
 
   carregaClientes(){
@@ -173,6 +174,10 @@ export class CadastroComponent implements OnInit {
     });    
   }
 
+  redirectTo(uri:string){
+    this.router.navigateByUrl('/login', {skipLocationChange: true}).then(()=>
+    this.router.navigate([uri]));
+  }
 
 
 }
