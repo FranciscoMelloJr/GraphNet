@@ -16,7 +16,8 @@
                                     <p><strong>Telefone:</strong> {{p.telefone}}</p>
                                     <p><strong>E-mail:</strong> {{p.email}}</p>
                                     <p><strong>Data de cadastro:</strong> {{p.data | date:'dd/MM/yyyy'}}</p>
-                                    <button class="options-cli" (click)="removeSolicitacao(p.id)" mat-button>Remover Cliente</button>
+                                    <button class="options" (click)="desvincular(p.id)" mat-button>Desvincular</button>
+                                    <button class="options" (click)="removeSolicitacao(p.id)" mat-button>Remover</button>
                               </agm-info-window>
                         </agm-marker>
                         
@@ -68,7 +69,7 @@
                               <agm-info-window>
                                     <p><strong>Caixa de Distribuição</strong></p>
                                     <p><strong>Nome:</strong> {{c.nome}}</p>
-                                    <button class="options" mat-button>Link</button>
+                                    <button class="options" mat-button>Vincular</button>
                                     <button class="options" (click)="removeCaixa(c.id)" mat-button>Remover</button>
                               </agm-info-window>
                         </agm-marker>

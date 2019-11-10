@@ -11,15 +11,16 @@
     </a>
     
     <div fxShow="true" fxHide.lt-md="true">
-      <a mat-button class="toolbar-options" routerLink="/quem-somos">Quem Somos?</a>
+      <a *ngIf="mostrarQuemSomos" mat-button class="toolbar-options" routerLink="/quem-somos">Quem Somos?</a>
       <a mat-button class="toolbar-options" routerLink="/contato">Contato</a>
-      <a mat-button class="toolbar-options" routerLink="/analises">Análises</a>
+      <a *ngIf="mostrarAnalises" mat-button class="toolbar-options" routerLink="/analises">Análises</a>
     </div>  
       
     <span class="fill"></span>
       
     <div fxShow="true" fxHide.lt-md="true">
-      <a mat-button class="toolbar-cadastro" routerLink="/cadastro">Cadastre-se!</a>
+      <a *ngIf="mostrarCadastro" mat-button class="toolbar-cadastro" routerLink="/cadastro">Cadastre-se!</a>
+      <button *ngIf="mostrarLogout" (click)="Logout()" mat-button class="toolbar-cadastro">Logout</button>
     </div>
      
   </mat-toolbar>

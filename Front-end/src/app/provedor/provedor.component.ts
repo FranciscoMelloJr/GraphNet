@@ -38,6 +38,7 @@ export class ProvedorComponent implements OnInit {
   // Variáveis para adicionar um cliente pendente a uma caixa
   caixaSelecionada: number;
   solicitacaoEnviar: Solicitacao = new Solicitacao();
+  solicitacaoDesvincular: Solicitacao = new Solicitacao();
   idCli: number;
   nomeCli: string;
   cpfCli: string;
@@ -53,7 +54,6 @@ export class ProvedorComponent implements OnInit {
         this.solicitacaoEnviar.provedor = s.provedor;
         this.solicitacaoEnviar.addCaixa = this.caixaSelecionada;
         this.solicitacaoEnviar.status = "";
-        console.log(this.solicitacaoEnviar)
         
         this.service.alterar(this.solicitacaoEnviar).then(() => {
           this.redirectTo('/provedor');
@@ -61,6 +61,51 @@ export class ProvedorComponent implements OnInit {
         
       }
     }
+  }
+
+  private desvincular(id : number){
+    for (let s of this.solicitacoes) {
+      if (s.cliente.id == id){
+        this.solicitacaoDesvincular.id = s.id;
+        this.solicitacaoDesvincular.cliente = s.cliente;
+        this.solicitacaoDesvincular.data = s.data;
+        this.solicitacaoDesvincular.provedor = s.provedor;
+        this.solicitacaoDesvincular.addCaixa = 0;
+        this.solicitacaoDesvincular.status = "Pendente";
+
+        this.service.alterar(this.solicitacaoDesvincular).then(() => {
+        this.redirectTo('/provedor');
+        });
+
+      }
+    }
+  }
+
+  
+  private removeSolicitacao(id : number){
+    this.service.removeSolicitacao(id).then(() => 
+    this.redirectTo('/provedor'));
+  }
+
+  private removeCaixa(id: number){
+    this.service.removeCaixa(id).then(()=>
+    this.redirectTo('/provedor'));
+  }
+  redirectTo(uri:string){
+    this.router.navigateByUrl('/login', {skipLocationChange: true}).then(()=>
+    this.router.navigate([uri]));
+  }
+
+  private mostraAddCli(p: Pendente){
+    const el: HTMLElement = document.getElementById('addCli');
+    this.idCli = p.id;
+    this.nomeCli = p.nome;
+    this.cpfCli = p.cpf;
+    this.telefoneCli = p.cpf;
+    this.emailCli = p.email;
+
+    el.style.display = 'block';
+
   }
 
 
@@ -244,30 +289,5 @@ export class ProvedorComponent implements OnInit {
     }
   }
 
-  private removeSolicitacao(id : number){
-    this.service.removeSolicitacao(id).then(() => 
-    this.redirectTo('/provedor'));
-  }
-
-  private removeCaixa(id: number){
-    this.service.removeCaixa(id).then(()=>
-    this.redirectTo('/provedor'));
-  }
-  redirectTo(uri:string){
-    this.router.navigateByUrl('/login', {skipLocationChange: true}).then(()=>
-    this.router.navigate([uri]));
-  }
-
-  private mostraAddCli(p: Pendente){
-    const el: HTMLElement = document.getElementById('addCli');
-    this.idCli = p.id;
-    this.nomeCli = p.nome;
-    this.cpfCli = p.cpf;
-    this.telefoneCli = p.cpf;
-    this.emailCli = p.email;
-
-    el.style.display = 'block';
-
-  }
 
 }

@@ -38,7 +38,11 @@ public class SolicitacaoService {
 	public Solicitacao update(Solicitacao obj) {
 		Solicitacao newObj = find(obj.getId());
 		newObj.setStatus(obj.getStatus());
-		newObj.setCaixa(caixaService.find(obj.getAddCaixa()));
+		if (obj.getAddCaixa() == 0) {
+			newObj.setCaixa(null);
+		} else {
+			newObj.setCaixa(caixaService.find(obj.getAddCaixa()));
+		}
 		return repo.save(newObj);
 	}
 
