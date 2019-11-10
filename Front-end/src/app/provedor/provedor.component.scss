@@ -16,6 +16,7 @@
     max-width: 650px;
     max-height: fit-content;
     margin: 20px;
+    margin-bottom: 0px;
     border: 1px solid #3d3d3d;
     font-size: 18px;
 }
@@ -47,6 +48,23 @@
 
 .options {
     font-size: 12px;
+    margin-left: 3px;
+    margin-right: 3px;
+    background-color: #364d94;
+    color: black;
+    -webkit-transition: color 200ms linear;
+    -ms-transition: color 200ms linear;
+    transition: color 200ms linear;
+    &:hover{
+      color: white;
+      -webkit-transition: color 200ms linear;
+      -ms-transition: color 200ms linear;
+      transition: color 200ms linear;
+    }
+}
+
+.options-mapa {
+    font-size: 16px;
     margin-left: 3px;
     margin-right: 3px;
     background-color: #364d94;

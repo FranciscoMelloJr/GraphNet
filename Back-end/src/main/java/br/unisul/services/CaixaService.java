@@ -16,12 +16,16 @@ public class CaixaService {
 	@Autowired
 	private CaixaRepository repo;
 	
+	@Autowired
+	private ProvedorService provedorService;
+	
 	public Caixa find (Integer id) {
 		Optional<Caixa> obj = repo.findById(id);
 		return obj.orElse(null);
 	}
 	
 	public Caixa insert (Caixa obj) {
+		obj.setProvedor(provedorService.find(obj.getProvedor().getId()));
 		obj.setId(null);
 		return repo.save(obj);
 	}

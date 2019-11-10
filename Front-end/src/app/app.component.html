@@ -11,6 +11,7 @@
     </a>
     
     <div fxShow="true" fxHide.lt-md="true">
+      <a *ngIf="mostrarControle" mat-button class="toolbar-options" routerLink="/provedor">Controle Geográfico</a>
       <a *ngIf="mostrarQuemSomos" mat-button class="toolbar-options" routerLink="/quem-somos">Quem Somos?</a>
       <a mat-button class="toolbar-options" routerLink="/contato">Contato</a>
       <a *ngIf="mostrarAnalises" mat-button class="toolbar-options" routerLink="/analises">Análises</a>

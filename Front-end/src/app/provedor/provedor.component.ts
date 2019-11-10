@@ -1,10 +1,10 @@
 
 import { FormControl, Validators, Form, NgForm } from '@angular/forms';
 import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
-import { MapsAPILoader, MouseEvent } from '@agm/core';
+import { MapsAPILoader, MouseEvent, AgmMarker } from '@agm/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProvedorService } from './provedor.service';
-import { Pendente, Caixa, Linha, Cliente, Solicitacao } from './model';
+import { Pendente, Caixa, Linha, Cliente, Solicitacao, Provedor } from './model';
 
 
 @Component({
@@ -17,7 +17,10 @@ export class ProvedorComponent implements OnInit {
   latitude: number;
   longitude: number;
   zoom: number;
-  
+  address: string;
+
+  visivel : boolean = false;
+
   id_provedor = JSON.parse(localStorage.getItem('provedor'));
 
   selecionado : number;
@@ -44,6 +47,11 @@ export class ProvedorComponent implements OnInit {
   cpfCli: string;
   telefoneCli: string;
   emailCli: string;
+
+
+  // Variáveis para adicionar uma caixa
+  caixaAdicionar : Caixa = new Caixa();
+  nomeCaixa : string;
 
   private addCli(){
     for (let s of this.solicitacoes){
@@ -106,6 +114,21 @@ export class ProvedorComponent implements OnInit {
 
     el.style.display = 'block';
 
+  } 
+  private mostraAddCaixa(){
+    const el: HTMLElement = document.getElementById('addCaixa');
+    el.style.display = 'block';
+    this.visivel = true;
+  }
+
+  private addCaixa() {
+    this.caixaAdicionar.provedor = new Provedor();
+    this.caixaAdicionar.nome = this.nomeCaixa;
+    this.caixaAdicionar.latitude = this.latitude;
+    this.caixaAdicionar.longitude = this.longitude;
+    this.caixaAdicionar.provedor.id = this.id_provedor;
+    this.service.adicionarCaixa(this.caixaAdicionar).then(() =>
+    this.redirectTo('/provedor'));
   }
 
 
@@ -287,6 +310,31 @@ export class ProvedorComponent implements OnInit {
         this.zoom = 15;
       });
     }
+  }
+
+  markerDragEnd($event: MouseEvent) {
+    console.log($event);
+    this.latitude = $event.coords.lat;
+    this.longitude = $event.coords.lng;
+    this.getAddress(this.latitude, this.longitude);
+  }
+
+  getAddress(latitude, longitude) {
+    this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
+      console.log(results);
+      console.log(status);
+      if (status === 'OK') {
+        if (results[0]) {
+          this.zoom = 15;
+          this.address = results[0].formatted_address;
+        } else {
+          window.alert('Nenhum resultado encontrado.');
+        }
+      } else {
+        window.alert('Geocoder falhou devido a: ' + status);
+      }
+ 
+    });
   }
 
 

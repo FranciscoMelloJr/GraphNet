@@ -9,6 +9,7 @@ import { AuthService } from './login-provedor/auth.service';
 })
 export class AppComponent implements OnInit{
 
+  mostrarControle = false;
   mostrarCadastro = true;
   mostrarLogout = false;
   mostrarQuemSomos = true;
@@ -23,6 +24,9 @@ export class AppComponent implements OnInit{
     ) { }
 
   ngOnInit() {
+    this.service.mostrarControleEmiiter.subscribe(
+      mostrar => this.mostrarControle = mostrar
+    );
     this.service.mostrarCadastroEmiiter.subscribe(
       mostrar => this.mostrarCadastro = mostrar
     );
@@ -41,6 +45,9 @@ export class AppComponent implements OnInit{
     localStorage.clear();
     this.mostrarCadastro = true;
     this.mostrarLogout = false;
+    this.mostrarAnalises = true;
+    this.mostrarQuemSomos = true;
+    this.mostrarControle = false;
     this.redirectTo('/')
   }
 
