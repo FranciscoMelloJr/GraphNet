@@ -1,4 +1,5 @@
 export class Pendente{
+    id: number;
     nome: string;
     latitude: number;
     longitude: number;
@@ -9,6 +10,7 @@ export class Pendente{
 }
 
 export class Caixa{
+    id : number;
     nome: string;
     latitude: number;
     longitude: number;
@@ -23,8 +25,8 @@ export class Cliente {
     telefone: string;
     cep: string;
     cpf: string;
-    latitude: string;
-    longitude: string;
+    latitude: number;
+    longitude: number;
     status: string;
 }
 

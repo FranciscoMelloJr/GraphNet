@@ -8,6 +8,8 @@ export class ProvedorService {
 
   provedoresURL = 'http://localhost:8080/provedores';
 
+  solicitacoesURL = 'http://localhost:8080/solicitacoes';
+
   caixasURL = 'http://localhost:8080/caixas';
 
   constructor(
@@ -20,6 +22,12 @@ export class ProvedorService {
 
   listaCaixas():Promise<any>{
     return this.http.get<any>(this.caixasURL).toPromise();
+  }
+
+  removeSolicitacao(id: number):Promise<void>{
+    return this.http.delete(this.solicitacoesURL + '/' + id)
+    .toPromise()
+    .then(() => null);
   }
 
 }

@@ -4,7 +4,7 @@ import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core'
 import { MapsAPILoader, MouseEvent } from '@agm/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProvedorService } from './provedor.service';
-import { Pendente, Caixa, Linha } from './model';
+import { Pendente, Caixa, Linha, Cliente } from './model';
 
 
 @Component({
@@ -20,11 +20,19 @@ export class ProvedorComponent implements OnInit {
   
   id_provedor = JSON.parse(localStorage.getItem('provedor'));
 
+  selecionado : number;
+
   solicitacoes = [];
 
   linhas : Linha [] = [];
 
-  pendentes: Pendente [] = [];
+  clientes: Pendente [] = [];
+
+  pendentesVerde: Pendente [] = [];
+  pendentesLaranja: Pendente [] = [];
+  pendentesVermelho: Pendente [] = [];
+
+  data : Date = new Date();
 
   caixas: Caixa [] = [];
   caixasAFilrar: Caixa [] = [];
@@ -37,6 +45,28 @@ export class ProvedorComponent implements OnInit {
     }
   }
   
+  iconVerde = {
+    url: 'https://i.imgur.com/UkiFFaS.png',
+    scaledSize: {
+      width: 40,
+      height: 40
+    }
+  }
+  iconLaranja = {
+    url: 'https://i.imgur.com/E92nLs2.png',
+    scaledSize: {
+      width: 40,
+      height: 40
+    }
+  }
+  iconVermelho = {
+    url: 'https://i.imgur.com/7ac7UKA.png',
+    scaledSize: {
+      width: 40,
+      height: 40
+    }
+  }
+
   iconCliente = {
     url: 'https://i.imgur.com/k9Ev7p2.png',
     scaledSize: {
@@ -53,6 +83,7 @@ export class ProvedorComponent implements OnInit {
 
   constructor(
     private service: ProvedorService,
+    private router: Router,
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone
     ) { }
@@ -62,16 +93,57 @@ export class ProvedorComponent implements OnInit {
       this.service.listaSolicitacoes(this.id_provedor).then((dados) => this.solicitacoes = dados).then(() => 
       {
         for (let s of this.solicitacoes){
-          this.pendentes.push({
-            nome : s.cliente.nome,
-            latitude : Number(s.cliente.latitude),
-            longitude : Number(s.cliente.longitude),
-            cpf : s.cliente.cpf,
-            telefone: s.cliente.telefone,
-            email: s.cliente.email,
-            data: s.data
+          if (s.status == 'Pendente'){
+            if (Number(this.data.getMonth() + 1) - Number(s.data.substring(5,7) < 3)){
+              this.pendentesVerde.push({
+                id : s.cliente.id,
+                nome : s.cliente.nome,
+                latitude : Number(s.cliente.latitude),
+                longitude : Number(s.cliente.longitude),
+                cpf : s.cliente.cpf,
+                telefone: s.cliente.telefone,
+                email: s.cliente.email,
+                data: s.data
+              }
+              );
+            } else if (Number(this.data.getMonth() + 1) - Number(s.data.substring(5,7) < 6)) {
+              this.pendentesLaranja.push({
+                id : s.cliente.id,
+                nome : s.cliente.nome,
+                latitude : Number(s.cliente.latitude),
+                longitude : Number(s.cliente.longitude),
+                cpf : s.cliente.cpf,
+                telefone: s.cliente.telefone,
+                email: s.cliente.email,
+                data: s.data
+              }
+              );
+            } else {
+              this.pendentesVermelho.push({
+                id : s.cliente.id,
+                nome : s.cliente.nome,
+                latitude : Number(s.cliente.latitude),
+                longitude : Number(s.cliente.longitude),
+                cpf : s.cliente.cpf,
+                telefone: s.cliente.telefone,
+                email: s.cliente.email,
+                data: s.data
+              }
+              );
+            }
+          } else {
+            this.clientes.push({
+              id : s.cliente.id,
+              nome : s.cliente.nome,
+              latitude : Number(s.cliente.latitude),
+              longitude : Number(s.cliente.longitude),
+              cpf : s.cliente.cpf,
+              telefone: s.cliente.telefone,
+              email: s.cliente.email,
+              data: s.data
+            }
+            );
           }
-          );
         }
     
       }).then(() => 
@@ -81,6 +153,7 @@ export class ProvedorComponent implements OnInit {
           for (let c of this.caixasAFilrar){
             if (c.provedor.id == this.id_provedor){
               this.caixas.push({
+                id : c.id,
                 nome : c.nome,
                 latitude : c.latitude,
                 longitude : c.longitude,
@@ -142,6 +215,14 @@ export class ProvedorComponent implements OnInit {
       });
     }
   }
-  
+
+  private removeSolicitacao(id : number){
+    this.service.removeSolicitacao(id).then(() => 
+    this.redirectTo('/provedor'));
+  }
+
+  redirectTo(uri:string){
+    this.router.navigateByUrl('/login', {skipLocationChange: true}).then(()=>
+    this.router.navigate([uri]));}
 
 }

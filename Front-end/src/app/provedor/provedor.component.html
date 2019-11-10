@@ -1,5 +1,5 @@
 <div class="container">
-      Página de Controle Geográfico
+      Página de Controle Geográfico {{selecionado}}
       <div fxLayout
         fxLayout.lt-lg="column"
         fxLayoutAlign="center"
@@ -9,17 +9,54 @@
             <div fxFlex="nogrow">
                   <mat-card class="fundo-mapa">
                   <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
-                        <agm-marker [iconUrl]="iconCliente" *ngFor="let p of pendentes" [latitude]="p.latitude" [longitude]="p.longitude"> 
+                        <agm-marker [iconUrl]="iconCliente" *ngFor="let p of clientes" [latitude]="p.latitude" [longitude]="p.longitude"> 
                               <agm-info-window>
                                     <p><strong>Nome:</strong> {{p.nome}}</p>
                                     <p><strong>CPF:</strong> {{p.cpf}}</p>
                                     <p><strong>Telefone:</strong> {{p.telefone}}</p>
                                     <p><strong>E-mail:</strong> {{p.email}}</p>
                                     <p><strong>Data de cadastro:</strong> {{p.data | date:'dd/MM/yyyy'}}</p>
+                                    <button class="options-cli" (click)="removeSolicitacao(p.id)" mat-button>Remover Cliente</button>
+                              </agm-info-window>
+                        </agm-marker>
+                        
+                        <agm-marker [iconUrl]="iconVerde" *ngFor="let p of pendentesVerde" [latitude]="p.latitude" [longitude]="p.longitude"> 
+                              <agm-info-window>
+                                    <p><strong>Nome:</strong> {{p.nome}}</p>
+                                    <p><strong>CPF:</strong> {{p.cpf}}</p>
+                                    <p><strong>Telefone:</strong> {{p.telefone}}</p>
+                                    <p><strong>E-mail:</strong> {{p.email}}</p>
+                                    <p><strong>Data de cadastro:</strong> {{p.data | date:'dd/MM/yyyy'}}</p>
+                                    <button class="options" mat-button>Adicionar</button>
+                                    <button class="options" (click)="removeSolicitacao(p.id)" mat-button>Remover</button>
                               </agm-info-window>
                         </agm-marker>
 
-                        <agm-polyline  *ngFor="let l of linhas" [strokeOpacity]="0.8" [strokeWeight]="1" [strokeColor]="'blue'">
+                        <agm-marker [iconUrl]="iconLaranja" *ngFor="let p of pendentesLaranja" [latitude]="p.latitude" [longitude]="p.longitude"> 
+                              <agm-info-window>
+                                    <p><strong>Nome:</strong> {{p.nome}}</p>
+                                    <p><strong>CPF:</strong> {{p.cpf}}</p>
+                                    <p><strong>Telefone:</strong> {{p.telefone}}</p>
+                                    <p><strong>E-mail:</strong> {{p.email}}</p>
+                                    <p><strong>Data de cadastro:</strong> {{p.data | date:'dd/MM/yyyy'}}</p>
+                                    <button class="options" mat-button>Adicionar</button>
+                                    <button class="options" (click)="removeSolicitacao(p.id)" mat-button>Remover</button>
+                              </agm-info-window>
+                        </agm-marker>
+
+                        <agm-marker [iconUrl]="iconVermelho" *ngFor="let p of pendentesVermelho" [latitude]="p.latitude" [longitude]="p.longitude"> 
+                              <agm-info-window>
+                                    <p><strong>Nome:</strong> {{p.nome}}</p>
+                                    <p><strong>CPF:</strong> {{p.cpf}}</p>
+                                    <p><strong>Telefone:</strong> {{p.telefone}}</p>
+                                    <p><strong>E-mail:</strong> {{p.email}}</p>
+                                    <p><strong>Data de cadastro:</strong> {{p.data | date:'dd/MM/yyyy'}}</p>
+                                    <button class="options" mat-button>Adicionar</button>
+                                    <button class="options" (click)="removeSolicitacao(p.id)" mat-button>Remover</button>
+                              </agm-info-window>
+                        </agm-marker>
+
+                        <agm-polyline  *ngFor="let l of linhas" [strokeOpacity]="0.8" [strokeWeight]="1" [strokeColor]="'purple'">
                               <agm-polyline-point [latitude]="l.inicioLat" [longitude]="l.inicioLng">
                               </agm-polyline-point>
 
@@ -31,6 +68,8 @@
                               <agm-info-window>
                                     <p><strong>Caixa de Distribuição</strong></p>
                                     <p><strong>Nome:</strong> {{c.nome}}</p>
+                                    <button class="options" mat-button>Link</button>
+                                    <button class="options" mat-button>Remover</button>
                               </agm-info-window>
                         </agm-marker>
                   </agm-map>

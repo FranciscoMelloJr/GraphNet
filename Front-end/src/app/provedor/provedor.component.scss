@@ -44,11 +44,9 @@
 }
 
 .options {
-    font-size: 15px;
-    width: fit-content;
-    height:fit-content;
-    margin-top: 25px;
-    margin-right: 20px;
+    font-size: 12px;
+    margin-left: 3px;
+    margin-right: 3px;
     background-color: #364d94;
     color: black;
     -webkit-transition: color 200ms linear;
@@ -60,7 +58,21 @@
       -ms-transition: color 200ms linear;
       transition: color 200ms linear;
     }
-    
+}
+
+.options-cli {
+    font-size: 15px;
+    background-color: #364d94;
+    color: black;
+    -webkit-transition: color 200ms linear;
+    -ms-transition: color 200ms linear;
+    transition: color 200ms linear;
+    &:hover{
+      color: white;
+      -webkit-transition: color 200ms linear;
+      -ms-transition: color 200ms linear;
+      transition: color 200ms linear;
+    }
 }
 
 agm-map {
