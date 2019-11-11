@@ -17,9 +17,15 @@ export class ProvedorComponent implements OnInit {
   latitude: number;
   longitude: number;
   zoom: number;
+  
+  latitudeCli: number;
+  longitudeCli: number;
+  zoomCli: number;
+
   address: string;
 
-  visivel : boolean = false;
+  visivelCaixa : boolean = false;
+  visivelCliente : boolean = false;
 
   id_provedor = JSON.parse(localStorage.getItem('provedor'));
 
@@ -48,6 +54,16 @@ export class ProvedorComponent implements OnInit {
   telefoneCli: string;
   emailCli: string;
 
+  
+  // Variáveis para adicionar um cliente
+  clienteEnviar : Cliente = new Cliente();
+  solicitacaoNova : Solicitacao = new Solicitacao();
+  cIdCli: number;
+  cNomeCli: string;
+  cCpfCli: string;
+  cTelefoneCli: string;
+  cEmailCli: string;
+  cCepCli: string;
 
   // Variáveis para adicionar uma caixa
   caixaAdicionar : Caixa = new Caixa();
@@ -105,20 +121,40 @@ export class ProvedorComponent implements OnInit {
   }
 
   private mostraAddCli(p: Pendente){
-    const el: HTMLElement = document.getElementById('addCli');
     this.idCli = p.id;
     this.nomeCli = p.nome;
     this.cpfCli = p.cpf;
     this.telefoneCli = p.cpf;
     this.emailCli = p.email;
 
-    el.style.display = 'block';
-
+    const mCli: HTMLElement = document.getElementById('addCli');
+    mCli.style.display = 'block';
+    const mCaixa: HTMLElement = document.getElementById('addCaixa');
+    mCaixa.style.display = 'none';
+    const cCli: HTMLElement = document.getElementById('cadCli');
+    cCli.style.display = 'none';
   } 
+
+  private mostraCadCli(){
+    const cCli: HTMLElement = document.getElementById('cadCli');
+    cCli.style.display = 'block';
+    const mCli: HTMLElement = document.getElementById('addCli');
+    mCli.style.display = 'none';
+    const mCaixa: HTMLElement = document.getElementById('addCaixa');
+    mCaixa.style.display = 'none';
+
+    this.visivelCliente = true;
+  } 
+
   private mostraAddCaixa(){
-    const el: HTMLElement = document.getElementById('addCaixa');
-    el.style.display = 'block';
-    this.visivel = true;
+    const mCaixa: HTMLElement = document.getElementById('addCaixa');
+    mCaixa.style.display = 'block';
+    const mCli: HTMLElement = document.getElementById('addCli');
+    mCli.style.display = 'none';
+    const cCli: HTMLElement = document.getElementById('cadCli');
+    cCli.style.display = 'none';
+
+    this.visivelCaixa = true;
   }
 
   private addCaixa() {
@@ -129,6 +165,29 @@ export class ProvedorComponent implements OnInit {
     this.caixaAdicionar.provedor.id = this.id_provedor;
     this.service.adicionarCaixa(this.caixaAdicionar).then(() =>
     this.redirectTo('/provedor'));
+  }
+
+  private cadCli(){
+    this.clienteEnviar.nome = this.cNomeCli;
+    this.clienteEnviar.cpf = this.cCpfCli;
+    this.clienteEnviar.cep = this.cCepCli;
+    this.clienteEnviar.email = this.cEmailCli;
+    this.clienteEnviar.telefone = this.cTelefoneCli;
+    this.clienteEnviar.latitude = this.latitudeCli;
+    this.clienteEnviar.longitude = this.longitudeCli;
+
+
+    this.service.adicionarCliente(this.clienteEnviar).then(() =>
+    {
+      this.solicitacaoNova.cliente = this.clienteEnviar;
+      this.solicitacaoNova.provedor = new Provedor();
+      this.solicitacaoNova.provedor.id = this.id_provedor;
+      this.solicitacaoNova.status = "Pendente";
+      this.solicitacaoNova.data = this.data;
+      this.service.adicionarSolicitacao(this.solicitacaoNova).then(() => {
+        this.redirectTo('/provedor')
+      })
+    });
   }
 
 
@@ -175,6 +234,9 @@ export class ProvedorComponent implements OnInit {
   
   @ViewChild('search', {static: false})
   public searchElementRef: ElementRef;
+
+  @ViewChild('searchCli', {static: false})
+  public searchCliElementRef: ElementRef;
 
   constructor(
     private service: ProvedorService,
@@ -283,6 +345,11 @@ export class ProvedorComponent implements OnInit {
       let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
         types: ["address"]
       });
+
+      let autocompleteCli = new google.maps.places.Autocomplete(this.searchCliElementRef.nativeElement, {
+        types: ["address"]
+      });
+
       autocomplete.addListener("place_changed", () => {
         this.ngZone.run(() => {
           // Resultado do Place
@@ -299,6 +366,23 @@ export class ProvedorComponent implements OnInit {
           this.zoom = 15;
         });
       });
+      autocompleteCli.addListener("place_changed", () => {
+        this.ngZone.run(() => {
+          // Resultado do Place
+          let place: google.maps.places.PlaceResult = autocompleteCli.getPlace();
+ 
+          // Verifica Resultado
+          if (place.geometry === undefined || place.geometry === null) {
+            return;
+          }
+ 
+          // Setando Latitude, Longitude e o Zoom
+          this.latitudeCli = place.geometry.location.lat();
+          this.longitudeCli = place.geometry.location.lng();
+          this.zoomCli = 15;
+        });
+      });
+
     });
   }
 
@@ -314,8 +398,10 @@ export class ProvedorComponent implements OnInit {
 
   markerDragEnd($event: MouseEvent) {
     console.log($event);
-    this.latitude = $event.coords.lat;
-    this.longitude = $event.coords.lng;
+    this.latitudeCli = $event.coords.lat;
+    this.longitudeCli = $event.coords.lng;
+    this.latitude = this.latitudeCli;
+    this.longitude = this.longitudeCli;
     this.getAddress(this.latitude, this.longitude);
   }
 

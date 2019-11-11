@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.unisul.domain.Cliente;
 import br.unisul.domain.Solicitacao;
 import br.unisul.repositories.SolicitacaoRepository;
 
@@ -55,7 +56,12 @@ public class SolicitacaoService {
 		Date data = new Date();
 		obj.setId(null);
 		obj.setData(data);
-		obj.setCliente(clienteService.find(obj.getCliente().getId()));
+		if (obj.getCliente().getId() != null) {
+			obj.setCliente(clienteService.find(obj.getCliente().getId()));
+		} else {
+			List<Cliente> cli = clienteService.findAll();
+			obj.setCliente(clienteService.find(cli.size()));
+		}
 		obj.setProvedor(provedorService.find(obj.getProvedor().getId()));
 		obj = repo.save(obj);
 		return obj;
