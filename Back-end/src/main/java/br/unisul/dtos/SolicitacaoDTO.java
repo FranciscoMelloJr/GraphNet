@@ -4,7 +4,13 @@ import java.io.Serializable;
 import java.util.Date;
 
 import br.unisul.domain.Solicitacao;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@NoArgsConstructor
+@Getter
+@Setter
 public class SolicitacaoDTO implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -15,8 +21,6 @@ public class SolicitacaoDTO implements Serializable {
 
 	private Date data;
 	
-	public SolicitacaoDTO() {}
-
 	public SolicitacaoDTO(Integer id, String status) {
 		this.id = id;
 		this.status = status;
@@ -27,29 +31,5 @@ public class SolicitacaoDTO implements Serializable {
 		status = s.getStatus();
 	}
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public Date getData() {
-		return data;
-	}
-
-	public void setData(Date data) {
-		this.data = data;
-	}
-	
 }
 		
