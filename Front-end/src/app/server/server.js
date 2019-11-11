@@ -25,6 +25,14 @@ app.post("/sendmail", (req, res) => {
   });
 });
 
+app.post("/sendmailprovedor", (req, res) => {
+  let user = req.body;
+  sendMailProvedor(user, info => {
+    res.send(info);
+  });
+});
+
+
 async function sendMail(user, callback) {
   // create reusable transporter object using the default SMTP transport
   let transporter = nodemailer.createTransport({
@@ -33,7 +41,7 @@ async function sendMail(user, callback) {
     secure: true, // true for 465, false for other ports
     auth: {
       user: 'graphnet.ceo@gmail.com',
-      pass: '(trocar a senha fora do GitHub)'
+      pass: '(Trocar a senha fora do GitHub)'
     }
   });
 
@@ -44,6 +52,34 @@ async function sendMail(user, callback) {
     html: `<h3>Nome: ${user.name}</h3><p>
     <h3>Email: ${user.email}</h3><p>
     <h3>Descrição do Problema: ${user.descricao}</p>`
+  };
+
+  // send mail with defined transport object
+  let info = await transporter.sendMail(mailOptions);
+
+  callback(info);
+}
+
+async function sendMailProvedor(user, callback) {
+  // create reusable transporter object using the default SMTP transport
+  let transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true, // true for 465, false for other ports
+    auth: {
+      user: 'graphnet.ceo@gmail.com',
+      pass: '(Trocar a senha fora do GitHub)'
+    }
+  });
+
+  let mailOptions = {
+    from: '"GraphNet" graphnet.ceo@gmail.com', // sender address
+    to: 'graphnet.ceo@gmail.com', // list of receivers
+    subject: ` GraphNet - Cadastro de Provedor, Provedor: ${user.nome}`, // Subject line
+    html: `<h3>Razão Social: ${user.razao}</h3><p>
+    <h3>CNPJ: ${user.cnpj}</h3><p>
+    <h3>Telefone: ${user.telefone}</h3><p>
+    <h3>E-mail: ${user.email}</h3><p>`
   };
 
   // send mail with defined transport object

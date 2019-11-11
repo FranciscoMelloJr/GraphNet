@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import {HttpService} from '../contact/http.service';
+import {HttpService} from '../server/http.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,6 +11,7 @@ import {HttpService} from '../contact/http.service';
 })
 export class ContactComponent implements OnInit {
   
+
 
   emailFormControl = new FormControl("", [
     Validators.required,
@@ -30,7 +32,7 @@ export class ContactComponent implements OnInit {
   ]);
 
 
-  constructor(public http: HttpService) {}
+  constructor(public http: HttpService, private router : Router) {}
 
   ngOnInit() {
     console.log(this.http.test);
@@ -48,5 +50,12 @@ export class ContactComponent implements OnInit {
         let res:any = data; 
       }
     );
+    this.redirectTo('/contato');
+  }
+  
+
+  redirectTo(uri:string){
+    this.router.navigateByUrl('/login', {skipLocationChange: true}).then(()=>
+    this.router.navigate([uri]));
   }
 }
