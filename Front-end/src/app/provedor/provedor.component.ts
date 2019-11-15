@@ -24,6 +24,9 @@ export class ProvedorComponent implements OnInit {
 
   address: string;
 
+  vinculosAtuais = [];
+  vinculosDisponiveis = [];
+
   visivelCaixa : boolean = false;
   visivelCliente : boolean = false;
 
@@ -33,6 +36,7 @@ export class ProvedorComponent implements OnInit {
 
   solicitacoes : Solicitacao [] = [];
   linhas : Linha [] = [];
+  linhasCaixas : Linha [] = [];
   clientes: Pendente [] = [];
 
   pendentesVerde: Pendente [] = [];
@@ -43,6 +47,12 @@ export class ProvedorComponent implements OnInit {
 
   caixas: Caixa [] = [];
   caixasAFilrar: Caixa [] = [];
+  caixaA: Caixa;
+  caixaB: Caixa;
+  caixaFinal: Caixa;
+  caixaADesvincular: Caixa;
+  caixaVincular : Caixa;
+  pode : boolean;
 
   // Variáveis para adicionar um cliente pendente a uma caixa
   caixaSelecionada: number;
@@ -133,7 +143,57 @@ export class ProvedorComponent implements OnInit {
     mCaixa.style.display = 'none';
     const cCli: HTMLElement = document.getElementById('cadCli');
     cCli.style.display = 'none';
+    const vinculos: HTMLElement = document.getElementById('vinculos');
+    vinculos.style.display = 'none';
   } 
+
+  private mostraVinculos(c : Caixa){
+    const cCli: HTMLElement = document.getElementById('cadCli');
+    cCli.style.display = 'none';
+    const mCli: HTMLElement = document.getElementById('addCli');
+    mCli.style.display = 'none';
+    const mCaixa: HTMLElement = document.getElementById('addCaixa');
+    mCaixa.style.display = 'none';
+    const vinculos: HTMLElement = document.getElementById('vinculos');
+    vinculos.style.display = 'block';
+
+    this.vinculosAtuais = [];
+
+    for (let va of c.vinculos){
+      this.service.procuraCaixa(va).then((dados) => {
+        this.caixaVincular = dados;
+        console.log(this.caixaVincular);
+        this.vinculosAtuais.push(this.caixaVincular);
+      });
+    }
+
+    this.vinculosDisponiveis = [];
+    this.caixaA = c;
+    console.log(this.vinculosAtuais)
+    this.pode = false;
+
+    for (let check of this.caixas){
+      if (this.caixaA.id != check.id ){
+        this.vinculosDisponiveis.push(check);
+      }
+    }
+
+
+  } 
+
+  private vincular(){
+    this.caixaB = this.caixaFinal;
+    this.service.adicionarVinculo(this.caixaA, this.caixaB);
+    this.service.adicionarVinculo(this.caixaB, this.caixaA).then(() =>
+    this.redirectTo('/provedor'));
+  }
+
+  private desvincularCaixa(){
+    this.caixaB = this.caixaADesvincular;
+    this.service.removerVinculo(this.caixaA, this.caixaB);
+    this.service.removerVinculo(this.caixaB, this.caixaA).then(() =>
+    this.redirectTo('/provedor'));
+  }
 
   private mostraCadCli(){
     const cCli: HTMLElement = document.getElementById('cadCli');
@@ -142,6 +202,8 @@ export class ProvedorComponent implements OnInit {
     mCli.style.display = 'none';
     const mCaixa: HTMLElement = document.getElementById('addCaixa');
     mCaixa.style.display = 'none';
+    const vinculos: HTMLElement = document.getElementById('vinculos');
+    vinculos.style.display = 'none';
 
     this.visivelCliente = true;
   } 
@@ -153,6 +215,8 @@ export class ProvedorComponent implements OnInit {
     mCli.style.display = 'none';
     const cCli: HTMLElement = document.getElementById('cadCli');
     cCli.style.display = 'none';
+    const vinculos: HTMLElement = document.getElementById('vinculos');
+    vinculos.style.display = 'none';
 
     this.visivelCaixa = true;
   }
@@ -316,6 +380,7 @@ export class ProvedorComponent implements OnInit {
                 latitude : c.latitude,
                 longitude : c.longitude,
                 provedor : c.provedor,
+                vinculos : c.vinculos,
                 solicitacoes : c.solicitacoes
               })
             }
@@ -329,6 +394,21 @@ export class ProvedorComponent implements OnInit {
                 fimLat : Number(soli.cliente.latitude),
                 fimLng : Number(soli.cliente.longitude)
               })
+            }
+          }
+          for (let c of this.caixas){
+            if (!(c.vinculos == null)){
+              for (let v of c.vinculos){
+                this.service.procuraCaixa(v).then((dados) => {
+                  this.caixaVincular = dados;;
+                  this.linhasCaixas.push({
+                    inicioLat : Number(c.latitude),
+                    inicioLng : Number(c.longitude),
+                    fimLat : Number(this.caixaVincular.latitude),
+                    fimLng : Number(this.caixaVincular.longitude)
+                  })
+                });
+              }
             }
           }
         }).then(() => console.log(this.linhas));

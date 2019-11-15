@@ -15,6 +15,7 @@ export class Caixa{
     latitude: number;
     longitude: number;
     provedor : Provedor;
+    vinculos : [];
     solicitacoes : Solicitacao[];
 }
 

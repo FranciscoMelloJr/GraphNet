@@ -28,7 +28,7 @@
                                     <p><strong>Telefone:</strong> {{p.telefone}}</p>
                                     <p><strong>E-mail:</strong> {{p.email}}</p>
                                     <p><strong>Data de cadastro:</strong> {{p.data | date:'dd/MM/yyyy'}}</p>
-                                    <button class="options" (click)="mostraAddCli(p)" mat-button>Adicionar</button>
+                                    <button class="options" (click)="mostraAddCli(p)" mat-button>Vincular</button>
                                     <button class="options" (click)="removeSolicitacao(p.id)" mat-button>Remover</button>
                               </agm-info-window>
                         </agm-marker>
@@ -40,7 +40,7 @@
                                     <p><strong>Telefone:</strong> {{p.telefone}}</p>
                                     <p><strong>E-mail:</strong> {{p.email}}</p>
                                     <p><strong>Data de cadastro:</strong> {{p.data | date:'dd/MM/yyyy'}}</p>
-                                    <button class="options" (click)="mostraAddCli(p)" mat-button>Adicionar</button>
+                                    <button class="options" (click)="mostraAddCli(p)" mat-button>Vincular</button>
                                     <button class="options" (click)="removeSolicitacao(p.id)" mat-button>Remover</button>
                               </agm-info-window>
                         </agm-marker>
@@ -52,7 +52,7 @@
                                     <p><strong>Telefone:</strong> {{p.telefone}}</p>
                                     <p><strong>E-mail:</strong> {{p.email}}</p>
                                     <p><strong>Data de cadastro:</strong> {{p.data | date:'dd/MM/yyyy'}}</p>
-                                    <button class="options" (click)="mostraAddCli(p)" mat-button>Adicionar</button>
+                                    <button class="options" (click)="mostraAddCli(p)" mat-button>Vincular</button>
                                     <button class="options" (click)="removeSolicitacao(p.id)" mat-button>Remover</button>
                               </agm-info-window>
                         </agm-marker>
@@ -64,12 +64,20 @@
                               <agm-polyline-point [latitude]="l.fimLat" [longitude]="l.fimLng">
                               </agm-polyline-point>
                         </agm-polyline>
+
+                        <agm-polyline  *ngFor="let l of linhasCaixas" [strokeOpacity]="0.8" [strokeWeight]="1" [strokeColor]="'blue'">
+                              <agm-polyline-point [latitude]="l.inicioLat" [longitude]="l.inicioLng">
+                              </agm-polyline-point>
+
+                              <agm-polyline-point [latitude]="l.fimLat" [longitude]="l.fimLng">
+                              </agm-polyline-point>
+                        </agm-polyline>
                         
                         <agm-marker [iconUrl]="iconCaixa" *ngFor="let c of caixas" [latitude]="c.latitude" [longitude]="c.longitude"> 
                               <agm-info-window>
                                     <p><strong>Caixa de Distribuição</strong></p>
                                     <p><strong>Nome:</strong> {{c.nome}}</p>
-                                    <button class="options" mat-button>Vincular</button>
+                                    <button class="options" (click)="mostraVinculos(c)" mat-button>Vínculos</button>
                                     <button class="options" (click)="removeCaixa(c.id)" mat-button>Remover</button>
                               </agm-info-window>
                         </agm-marker>
@@ -170,6 +178,38 @@
                                           <button type="button" class="options" (click)="cadCli()" mat-button>Adicionar Cliente</button>
                                           <button class="options" type="button" (click)="redirectTo('/provedor')" mat-button>Cancelar</button>
                                     </form>
+                              </div>
+
+                              <div id="vinculos" style="display:none">
+                                    <strong>Vínculos da Caixa</strong>
+                                    <p></p>
+                                    <p style="height:30px;"></p>
+                                    
+                                    <strong>Vincular:</strong>
+                                    <p></p>
+                                    Selecione uma caixa para vincular a esta caixa:
+                                    <p></p>
+                                    <form class="form">
+                                          <mat-form-field class="campo-select">
+                                                <mat-select [(value)]="caixaFinal" placeholder="Selecione uma caixa">
+                                                    <mat-option *ngFor="let v of vinculosDisponiveis" [value]="v">{{v.nome}}</mat-option>
+                                              </mat-select>
+                                            </mat-form-field>
+                                            <p></p>
+                                          <button type="button" (click)="vincular()" class="options" mat-button>Vincular</button>
+                                    </form>
+                                    <p style="height:30px;"></p>
+                                    <strong>Desvincular:</strong>
+                                    <form class="form">
+                                          <mat-form-field class="campo-select">
+                                                <mat-select [(value)]="caixaADesvincular" placeholder="Selecione uma caixa">
+                                                    <mat-option *ngFor="let va of vinculosAtuais" [value]="va">{{va.nome}}</mat-option>
+                                              </mat-select>
+                                            </mat-form-field>
+                                            <p></p>
+                                          <button type="button" (click)="desvincularCaixa()" class="options" mat-button>Desvincular</button>
+                                    </form>
+
                               </div>
                   </mat-card>
             </div>

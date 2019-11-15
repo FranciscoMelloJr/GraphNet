@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ReviewsService } from './reviews.service';
 
 @Component({
   selector: 'app-reviews',
@@ -7,9 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReviewsComponent implements OnInit {
 
-  constructor() { }
+  
+  provedores = [];
+
+
+  constructor(
+    private service: ReviewsService
+  ) { }
 
   ngOnInit() {
+    this.carregar();
+  }
+
+  carregar(){
+   
+    this.service.pesquisar()
+    .then((dados)=>{
+      this.provedores = dados;
+    });    
   }
 
 }

@@ -30,6 +30,8 @@ private static final long serialVersionUID = 1L;
 	private String longitude;
 	private String latitude;
 	
+	private ArrayList<Integer> vinculos = new ArrayList<Integer>();
+	
 	@OneToMany (mappedBy="caixa")
 	private List<Solicitacao> solicitacoes = new ArrayList<>();
 

@@ -42,6 +42,10 @@ export class ProvedorService {
     return this.http.get<any>(this.caixasURL).toPromise();
   }
 
+  procuraCaixa(id : any):Promise<any>{
+    return this.http.get<any>(this.caixasURL + '/' + id).toPromise();
+  }
+
   removeSolicitacao(id: number):Promise<void>{
     return this.http.delete(this.solicitacoesURL + '/' + id)
     .toPromise()
@@ -58,5 +62,16 @@ export class ProvedorService {
     return this.http.put(this.solicitacoesURL+'/'+solicitacao.id, solicitacao)
     .toPromise();
   }
+
+  adicionarVinculo(caixaA: Caixa, caixaB: Caixa): Promise<any>{
+    return this.http.put(this.caixasURL+'/'+caixaA.id, caixaB)
+    .toPromise();
+  }
+
+  removerVinculo(caixaA: Caixa, caixaB: Caixa): Promise<any>{
+    return this.http.put(this.caixasURL+'/'+caixaA.id + '/desvincular', caixaB)
+    .toPromise();
+  }
+  
 
 }

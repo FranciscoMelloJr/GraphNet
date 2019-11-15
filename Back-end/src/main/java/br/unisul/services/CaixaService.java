@@ -1,5 +1,6 @@
 package br.unisul.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,4 +44,33 @@ public class CaixaService {
 	public List<Caixa> findAll(){
 		return repo.findAll();
 	}
+	
+	public Caixa addVinculo (Caixa caixaA, Caixa caixaB) {
+		ArrayList<Integer> vinculos = new ArrayList<Integer>();
+		
+		vinculos = caixaA.getVinculos();
+		vinculos.add(caixaB.getId());
+		caixaA.setVinculos(vinculos);
+		return repo.save(caixaA);
+	}
+	
+	public Caixa removeVinculo (Caixa caixaA, Integer caixaB) {
+		ArrayList<Integer> vinculos = new ArrayList<Integer>();
+		vinculos = caixaA.getVinculos();
+		System.out.println("SERVICE\n\n\n\n\n\n\n\n\n");
+		for (int i = 0; i < caixaA.getVinculos().size(); i++) {
+			System.out.println(vinculos.get(i));
+			System.out.println(caixaB);
+			if (vinculos.get(i).equals(caixaB)) {
+				System.out.println("removeu");
+				vinculos.remove(i);
+			}
+		}
+		System.out.println("\n\n\n\n\n\n\n\n\nFINALSERVICE");
+		caixaA.setVinculos(null);
+		caixaA.setVinculos(vinculos);
+		return repo.save(caixaA);
+	}
+	
+	
 }

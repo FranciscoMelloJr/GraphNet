@@ -3,6 +3,8 @@ package br.unisul.resources;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -49,6 +51,21 @@ public class CaixaResource {
 		List<Caixa> lista = service.findAll();
 
 		return ResponseEntity.ok().body(lista);
+	}
+	
+	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
+	public ResponseEntity<Caixa> updateVincular(@Valid @RequestBody Caixa caixaB, @PathVariable Integer id){
+		Caixa caixaA = this.service.find(id);
+		service.addVinculo(caixaA, caixaB);
+		return ResponseEntity.ok().body(caixaA);
+	}
+	
+	@RequestMapping(value="/{id}/desvincular", method=RequestMethod.PUT)
+	public ResponseEntity<Caixa> updateDesvincular(@Valid @RequestBody Caixa caixaB, @PathVariable Integer id){
+		Caixa caixaA = this.service.find(id);
+		System.out.println("RESOURCE\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+		service.removeVinculo(caixaA, caixaB.getId());
+		return ResponseEntity.ok().body(caixaA);
 	}
 	
 	
