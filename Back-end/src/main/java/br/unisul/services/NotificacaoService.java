@@ -15,12 +15,16 @@ public class NotificacaoService {
 	@Autowired
 	private NotificacaoRepository repo;
 	
+	@Autowired
+	private ProvedorService provedorService;
+	
 	public Notificacao find (Integer id) {
 		Optional<Notificacao> obj = repo.findById(id);
 		return obj.orElse(null);
 	}
 	
 	public Notificacao insert (Notificacao obj) {
+		obj.setProvedor(provedorService.find(obj.getProvedor().getId()));
 		obj.setId(null);
 		return repo.save(obj);
 	}

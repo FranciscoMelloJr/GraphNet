@@ -7,13 +7,15 @@ import { AuthService } from './login-provedor/auth.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
 
+export class AppComponent implements OnInit{
+  
   mostrarControle = false;
   mostrarCadastro = true;
   mostrarLogout = false;
   mostrarQuemSomos = true;
   mostrarAnalises = true;
+  mostrarNotificacao = false;
   title = 'GraphNet';
   
   id_provedor = JSON.parse(localStorage.getItem('provedor'));
@@ -39,6 +41,9 @@ export class AppComponent implements OnInit{
     this.service.mostrarAnalisesEmiiter.subscribe(
       mostrar => this.mostrarAnalises = mostrar
     );
+    this.service.mostrarNotificacaoEmiiter.subscribe(
+      mostrar => this.mostrarNotificacao = mostrar
+    );
   }
 
   private Logout(){
@@ -48,6 +53,7 @@ export class AppComponent implements OnInit{
     this.mostrarAnalises = true;
     this.mostrarQuemSomos = true;
     this.mostrarControle = false;
+    this.mostrarNotificacao = false;
     this.redirectTo('/')
   }
 

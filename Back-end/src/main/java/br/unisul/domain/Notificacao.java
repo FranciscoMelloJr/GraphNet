@@ -7,8 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.ManyToOne;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,7 +27,7 @@ public class Notificacao implements Serializable {
 	private String latitude;
 	private String longitude;
 
-	@JsonIgnore
+	@ManyToOne
 	@JoinColumn (name="provedor_id")
 	private Provedor provedor;
 	

@@ -13,6 +13,7 @@ export class AuthService {
   mostrarQuemSomosEmiiter = new EventEmitter<boolean>();
   mostrarAnalisesEmiiter = new EventEmitter<boolean>();
   mostrarControleEmiiter = new EventEmitter<boolean>();
+  mostrarNotificacaoEmiiter = new EventEmitter<boolean>();
 
 
   constructor(
@@ -26,6 +27,7 @@ export class AuthService {
     this.mostrarQuemSomosEmiiter.emit(false);
     this.mostrarAnalisesEmiiter.emit(false);
     this.mostrarControleEmiiter.emit(true);
+    this.mostrarNotificacaoEmiiter.emit(true);
     this.router.navigate(['/provedor'])
   }
 

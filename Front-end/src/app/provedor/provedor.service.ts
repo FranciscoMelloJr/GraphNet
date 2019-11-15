@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ɵConsole } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Solicitacao, Caixa, Cliente } from './model';
+import { Solicitacao, Caixa, Cliente, Notificacao } from './model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +14,9 @@ export class ProvedorService {
   solicitacoesURL = 'http://localhost:8080/solicitacoes';
 
   caixasURL = 'http://localhost:8080/caixas';
+
+  
+  notificacoesURL = 'http://localhost:8080/notificacoes';
 
   constructor(
     private http: HttpClient
@@ -72,6 +75,23 @@ export class ProvedorService {
     return this.http.put(this.caixasURL+'/'+caixaA.id + '/desvincular', caixaB)
     .toPromise();
   }
+
+  listaNotificacoes():Promise<any>{
+    return this.http.get<any>(this.notificacoesURL).toPromise();
+  }
+
+  adicionarNotificacao(notificacao: Notificacao): Promise<any>{
+    return this.http.post(this.notificacoesURL, notificacao)
+    .toPromise();
+  }
+
+  removeNotificacao(id: number):Promise<void>{
+    return this.http.delete(this.notificacoesURL + '/' + id)
+    .toPromise()
+    .then(() => null);
+  }
+  
+  
   
 
 }

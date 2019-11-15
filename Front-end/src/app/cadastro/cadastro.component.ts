@@ -62,6 +62,8 @@ export class CadastroComponent implements OnInit {
     this.solicitacao.status = 'Pendente';
     this.solicitacao.cliente.id = this.clientes.length + 1;
     this.solicitacao.provedor.id = this.provedor_id;
+
+    this.notificacao.provedor.id = this.provedor_id;
     this.notificacao.descricao = 'Um novo cliente foi adicionado!';
     this.notificacao.latitude = this.latitude.toString();
     this.notificacao.longitude = this.longitude.toString();

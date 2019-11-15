@@ -18,7 +18,11 @@
     </div>  
       
     <span class="fill"></span>
-      
+
+    <a *ngIf="mostrarNotificacao" mat-button routerLink="/">
+      <span><img class="notificacao" src="../assets/sino.png"></span>
+    </a>
+
     <div fxShow="true" fxHide.lt-md="true">
       <a *ngIf="mostrarCadastro" mat-button class="toolbar-cadastro" routerLink="/cadastro">Cadastre-se!</a>
       <button *ngIf="mostrarLogout" (click)="Logout()" mat-button class="toolbar-cadastro">Logout</button>

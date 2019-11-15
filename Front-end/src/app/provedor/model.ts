@@ -58,3 +58,11 @@ export class Linha {
     fimLat: number;
     fimLng: number;
 }
+
+export class Notificacao {
+    id: number;
+    descricao: string;
+    provedor = new Provedor();
+    latitude: string;
+    longitude: string;
+}
