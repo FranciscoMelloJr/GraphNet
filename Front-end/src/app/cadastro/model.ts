@@ -27,3 +27,11 @@ export class Solicitacao {
     provedor = new Provedor();
     cliente = new Cliente();
 }
+
+export class Notificacao {
+    id: number;
+    descricao: string;
+    provedor = new Provedor();
+    latitude: string;
+    longitude: string;
+}

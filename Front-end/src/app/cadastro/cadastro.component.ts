@@ -1,4 +1,4 @@
-import { Cliente, Provedor, Solicitacao } from './model';
+import { Cliente, Provedor, Solicitacao, Notificacao } from './model';
 import { FormControl, Validators, Form, NgForm } from '@angular/forms';
 import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { MapsAPILoader, MouseEvent } from '@agm/core';
@@ -30,6 +30,8 @@ export class CadastroComponent implements OnInit {
 
   solicitacao = new Solicitacao();
 
+  notificacao = new Notificacao();
+
   
   @ViewChild('search', {static: false})
   public searchElementRef: ElementRef;
@@ -60,8 +62,13 @@ export class CadastroComponent implements OnInit {
     this.solicitacao.status = 'Pendente';
     this.solicitacao.cliente.id = this.clientes.length + 1;
     this.solicitacao.provedor.id = this.provedor_id;
+    this.notificacao.descricao = 'Um novo cliente foi adicionado!';
+    this.notificacao.latitude = this.latitude.toString();
+    this.notificacao.longitude = this.longitude.toString();
     this.service.adicionarSolicitacao(this.solicitacao).then(() => {
-      this.redirectTo('/cadastro');
+      this.service.adicionarNotificacao(this.notificacao).then(() => {
+        this.redirectTo('/cadastro');
+      })
     });
   }
 

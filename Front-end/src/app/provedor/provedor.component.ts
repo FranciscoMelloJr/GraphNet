@@ -162,14 +162,12 @@ export class ProvedorComponent implements OnInit {
     for (let va of c.vinculos){
       this.service.procuraCaixa(va).then((dados) => {
         this.caixaVincular = dados;
-        console.log(this.caixaVincular);
         this.vinculosAtuais.push(this.caixaVincular);
       });
     }
 
     this.vinculosDisponiveis = [];
     this.caixaA = c;
-    console.log(this.vinculosAtuais)
     this.pode = false;
 
     for (let check of this.caixas){
@@ -385,7 +383,7 @@ export class ProvedorComponent implements OnInit {
               })
             }
           }
-        }).then(() => console.log(this.caixas)).then(() => {
+        }).then(() => {
           for (let c of this.caixas) {
             for (let soli of c.solicitacoes){
               this.linhas.push({
@@ -411,7 +409,7 @@ export class ProvedorComponent implements OnInit {
               }
             }
           }
-        }).then(() => console.log(this.linhas));
+        });
       });
 
 
