@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'cadastro', component: CadastroComponent},
   { path: 'cadastro-provedor', component: CadastroProvedorComponent},
   { path: 'login', component: LoginProvedorComponent},
-  { path: 'provedor', component: ProvedorComponent, canActivate: [AuthGuard]}
+  { path: 'provedor', component: ProvedorComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({

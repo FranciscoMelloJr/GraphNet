@@ -48,6 +48,10 @@ export class ProvedorComponent implements OnInit {
 
   data : Date = new Date();
 
+  todasNotificacoes: Notificacao [] = [];
+  notificacoes: Notificacao [] = [];
+  qtd: number = 0;
+
   caixas: Caixa [] = [];
   caixasAFilrar: Caixa [] = [];
   caixaA: Caixa;
@@ -148,6 +152,8 @@ export class ProvedorComponent implements OnInit {
     cCli.style.display = 'none';
     const vinculos: HTMLElement = document.getElementById('vinculos');
     vinculos.style.display = 'none';
+    const mNotificacoes: HTMLElement = document.getElementById('telaNotificacoes');
+    mNotificacoes.style.display = 'none';
   } 
 
   private mostraVinculos(c : Caixa){
@@ -159,6 +165,8 @@ export class ProvedorComponent implements OnInit {
     mCaixa.style.display = 'none';
     const vinculos: HTMLElement = document.getElementById('vinculos');
     vinculos.style.display = 'block';
+    const mNotificacoes: HTMLElement = document.getElementById('telaNotificacoes');
+    mNotificacoes.style.display = 'none';
 
     this.vinculosAtuais = [];
 
@@ -205,6 +213,8 @@ export class ProvedorComponent implements OnInit {
     mCaixa.style.display = 'none';
     const vinculos: HTMLElement = document.getElementById('vinculos');
     vinculos.style.display = 'none';
+    const mNotificacoes: HTMLElement = document.getElementById('telaNotificacoes');
+    mNotificacoes.style.display = 'none';
 
     this.visivelCliente = true;
   } 
@@ -218,8 +228,25 @@ export class ProvedorComponent implements OnInit {
     cCli.style.display = 'none';
     const vinculos: HTMLElement = document.getElementById('vinculos');
     vinculos.style.display = 'none';
+    const mNotificacoes: HTMLElement = document.getElementById('telaNotificacoes');
+    mNotificacoes.style.display = 'none';
 
     this.visivelCaixa = true;
+  }
+
+  private mostraNotificacoes(){
+    const mCaixa: HTMLElement = document.getElementById('addCaixa');
+    mCaixa.style.display = 'none';
+    const mCli: HTMLElement = document.getElementById('addCli');
+    mCli.style.display = 'none';
+    const cCli: HTMLElement = document.getElementById('cadCli');
+    cCli.style.display = 'none';
+    const vinculos: HTMLElement = document.getElementById('vinculos');
+    vinculos.style.display = 'none';
+    const mNotificacoes: HTMLElement = document.getElementById('telaNotificacoes');
+    mNotificacoes.style.display = 'block';
+
+
   }
 
   private addCaixa() {
@@ -311,6 +338,16 @@ export class ProvedorComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+
+      this.service.listaNotificacoes().then((dados) => {
+        this.todasNotificacoes = dados;
+        for (let tN of this.todasNotificacoes){
+          if (tN.provedor.id == this.id_provedor){
+            this.qtd = this.qtd + 1;
+            this.notificacoes.push(tN);
+          }
+        }
+      });
 
       this.service.listaSolicitacoes(this.id_provedor).then((dados) => this.solicitacoes = dados).then(() => 
       {
@@ -472,7 +509,6 @@ export class ProvedorComponent implements OnInit {
                 if (calculo < 1){
                   contador = contador + 1;
                   jaObservados.push(p2);
-                  console.log(jaObservados)
                 }
               }
             }
@@ -569,12 +605,26 @@ export class ProvedorComponent implements OnInit {
     }
   }
 
+  removeNotificacao(id: number){
+    this.service.removeNotificacao(id).then(() => {
+      this.redirectTo('/provedor');
+    });
+  }
+
   markerDragEnd($event: MouseEvent) {
     console.log($event);
     this.latitudeCli = $event.coords.lat;
     this.longitudeCli = $event.coords.lng;
     this.latitude = this.latitudeCli;
     this.longitude = this.longitudeCli;
+    this.getAddress(this.latitude, this.longitude);
+  }
+
+  atualizaLocalizacao(latitude, longitude){
+    console.log("IHHUU")
+    this.latitude = Number(latitude);
+    this.longitude = Number(longitude);
+    this.zoom = 15;
     this.getAddress(this.latitude, this.longitude);
   }
 

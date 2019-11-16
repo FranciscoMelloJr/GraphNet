@@ -28,7 +28,12 @@ export class AuthService {
     this.mostrarAnalisesEmiiter.emit(false);
     this.mostrarControleEmiiter.emit(true);
     this.mostrarNotificacaoEmiiter.emit(true);
-    this.router.navigate(['/provedor'])
+    this.redirectTo('/provedor');
+  }
+
+  redirectTo(uri:string){
+    this.router.navigateByUrl('/login', {skipLocationChange: true}).then(()=>
+    this.router.navigate([uri]));
   }
 
 }

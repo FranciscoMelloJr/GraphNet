@@ -8,6 +8,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
+import { MatBadgeModule } from '@angular/material/';
 import { MatListModule } from '@angular/material/list';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MainPageComponent } from './main-page/main-page.component';
@@ -32,6 +33,7 @@ import { AuthService } from './login-provedor/auth.service';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +44,7 @@ import { AuthService } from './login-provedor/auth.service';
     CadastroComponent,
     CadastroProvedorComponent,
     LoginProvedorComponent,
-    ProvedorComponent,
+    ProvedorComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +66,8 @@ import { AuthService } from './login-provedor/auth.service';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDHHbP-zAyM-OJ2L3H6v_OwQlRKopRCugE',
       libraries: ['geometry', 'places', 'directions']
-    })
+    }),
+    MatBadgeModule
   ],
   exports:[
     RouterModule

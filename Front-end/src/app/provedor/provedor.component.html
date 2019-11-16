@@ -93,6 +93,7 @@
 
                   <button type="button" (click)="mostraAddCaixa()" class="options-mapa" mat-button>Adicionar Caixa</button>
                   <button type="button" (click)="mostraCadCli()" class="options-mapa" mat-button>Adicionar Cliente</button>
+                  <button matBadge="{{qtd}}" matBadgePosition="above after" matBadgeColor="warn" type="button" (click)="mostraNotificacoes()" class="options-mapa" mat-button>Notificações</button>
             </div>
             <div fxFlex="nogrow">
                   <mat-card class="fundo">
@@ -210,6 +211,19 @@
                                     </form>
 
                               </div>
+
+                              <div id="telaNotificacoes" style="display:none">
+                                          <strong>Notificações</strong>
+                                          <p></p>
+                                          <p style="height:30px;"></p>
+                                          <mat-card class="notificacao" *ngFor="let n of notificacoes">
+                                                <strong>{{n.descricao}}</strong>
+                                                <p></p>
+                                                <button style="margin-left:395px;" (click)="atualizaLocalizacao(n.latitude, n.longitude)" type="button" class="options-notificacao" mat-button>Ver no Mapa</button>
+                                                <button type="button" (click)="removeNotificacao(n.id)" class="options-notificacao-remove" mat-button>Remover</button>
+                                          </mat-card>
+      
+                                    </div>
                   </mat-card>
             </div>
     </div>

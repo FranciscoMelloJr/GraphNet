@@ -7,8 +7,8 @@ import { AuthService } from './login-provedor/auth.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-
 export class AppComponent implements OnInit{
+  
   
   mostrarControle = false;
   mostrarCadastro = true;
@@ -26,6 +26,7 @@ export class AppComponent implements OnInit{
     ) { }
 
   ngOnInit() {
+    
     this.service.mostrarControleEmiiter.subscribe(
       mostrar => this.mostrarControle = mostrar
     );
@@ -44,6 +45,7 @@ export class AppComponent implements OnInit{
     this.service.mostrarNotificacaoEmiiter.subscribe(
       mostrar => this.mostrarNotificacao = mostrar
     );
+        
   }
 
   private Logout(){

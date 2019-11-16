@@ -17,17 +17,17 @@
       <a *ngIf="mostrarAnalises" mat-button class="toolbar-options" routerLink="/analises">Análises</a>
     </div>  
       
-    <span class="fill"></span>
-
-    <a *ngIf="mostrarNotificacao" mat-button routerLink="/">
-      <span><img class="notificacao" src="../assets/sino.png"></span>
-    </a>
+    <span class="fill"></span>      
 
     <div fxShow="true" fxHide.lt-md="true">
       <a *ngIf="mostrarCadastro" mat-button class="toolbar-cadastro" routerLink="/cadastro">Cadastre-se!</a>
       <button *ngIf="mostrarLogout" (click)="Logout()" mat-button class="toolbar-cadastro">Logout</button>
     </div>
-     
+
+  
+
+
+
   </mat-toolbar>
   <mat-sidenav-container fxFlexFill class="example-container">
     <mat-sidenav class="mat-sidebar" #sidenav fxLayout="column" mode="over"  opened="false" fxHide.gt-sm="true">
@@ -36,7 +36,8 @@
         <a mat-button class="miniMenu" routerLink="/quem-somos">Quem Somos?</a>
         <a mat-button class="miniMenu" routerLink="/contato">Contato</a>
         <a mat-button class="miniMenu" routerLink="/analises">Análises</a>
-        <a mat-button class="miniMenu-cadastro" routerLink="/cadastro">Cadastre-se!</a>
+        <a *ngIf="mostrarCadastro"  mat-button class="miniMenu-cadastro" routerLink="/cadastro">Cadastre-se!</a>
+        <button *ngIf="mostrarLogout" mat-button class="miniMenu-cadastro" (click)="Logout()">Logout</button>
       </div>
     </mat-sidenav>
     <mat-sidenav-content fxFlexFill>
