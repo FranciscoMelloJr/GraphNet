@@ -65,7 +65,9 @@ export class ReviewsComponent implements OnInit {
           this.analise.provedor = s.provedor;
           this.analise.textoAnalise = this.analiseFormControl.value;
           this.analise.estrelas = this.estrelas;
-          this.service.adicionarAnalise(this.analise);
+          this.service.adicionarAnalise(this.analise).then(() => {
+            this.redirectTo('/analises');
+          });
         }
       }
     })

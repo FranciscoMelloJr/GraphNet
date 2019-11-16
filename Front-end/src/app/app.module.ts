@@ -29,6 +29,7 @@ import { LoginProvedorComponent } from './login-provedor/login-provedor.componen
 import { ProvedorComponent } from './provedor/provedor.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AuthService } from './login-provedor/auth.service';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -72,7 +73,7 @@ import { AuthService } from './login-provedor/auth.service';
   exports:[
     RouterModule
   ],
-  providers: [AuthGuard, AuthService],
+  providers: [AuthGuard, AuthService,DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

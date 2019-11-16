@@ -5,6 +5,7 @@ import { MapsAPILoader, MouseEvent, AgmMarker } from '@agm/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProvedorService } from './provedor.service';
 import { Pendente, Caixa, Linha, Cliente, Solicitacao, Provedor, Notificacao } from './model';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
@@ -14,6 +15,8 @@ import { Pendente, Caixa, Linha, Cliente, Solicitacao, Provedor, Notificacao } f
 })
 export class ProvedorComponent implements OnInit {
 
+  carregou: boolean = false;
+  
   latitude: number;
   longitude: number;
   zoom: number;
@@ -343,28 +346,29 @@ export class ProvedorComponent implements OnInit {
     private service: ProvedorService,
     private router: Router,
     private mapsAPILoader: MapsAPILoader,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private datePipe: DatePipe
     ) { }
 
   ngOnInit() {
-      
-      this.service.listaNotificacoes().then((dados) => {
-        this.todasNotificacoes = dados;
-        for (let tN of this.todasNotificacoes){
-          if (tN.provedor.id == this.id_provedor){
-            this.qtd = this.qtd + 1;
-            this.notificacoes.push(tN);
-          }
-        }
-        console.log(this.notificacoes)
-      });
-
+    
       this.service.listaSolicitacoes(this.id_provedor).then((dados) => this.solicitacoes = dados).then(() => 
       {
         for (let s of this.solicitacoes){
           if (s.status == 'Pendente'){
-          let newDate = new Date(s.data);
-            if (this.data.getDate() - newDate.getTime() < this.data.getDate() - 60){
+          
+          var data2 = this.datePipe.transform(this.datePipe.transform(this.data, 'yyyy-MM-dd'));
+          var data = this.datePipe.transform(this.datePipe.transform(s.data, 'yyyy-MM-dd'));
+          var date1 = new Date(data);
+          
+          console.log(date1);
+
+          console.log(date2);
+          var date2 = new Date(data2);
+          var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+          var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+          
+            if (diffDays < 30){
               this.pendentesVerde.push({
                 id : s.cliente.id,
                 nome : s.cliente.nome,
@@ -385,7 +389,7 @@ export class ProvedorComponent implements OnInit {
                 email: s.cliente.email,
                 data: s.data
               });
-            } else if (this.data.getDate() - s.data.getDate() < this.data.getDate() - 180) {
+            } else if (diffDays < 90) {
               this.pendentesLaranja.push({
                 id : s.cliente.id,
                 nome : s.cliente.nome,
@@ -533,6 +537,17 @@ export class ProvedorComponent implements OnInit {
           }
         }
         })
+      }).then(() => {
+        this.service.listaNotificacoes().then((dados) => {
+          this.todasNotificacoes = dados;
+          console.log(dados);
+          for (let tN of this.todasNotificacoes){
+            if (tN.provedor.id == this.id_provedor){
+              this.qtd = this.qtd + 1;
+              this.notificacoes.push(tN);
+            }
+          }
+        });
       });
 
 
