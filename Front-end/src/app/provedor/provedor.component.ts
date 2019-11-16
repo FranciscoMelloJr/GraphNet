@@ -180,10 +180,18 @@ export class ProvedorComponent implements OnInit {
 
     this.vinculosDisponiveis = [];
     this.caixaA = c;
-    this.pode = false;
 
     for (let check of this.caixas){
+      this.pode = false;
       if (this.caixaA.id != check.id ){
+        this.pode = true;
+        for (let check2 of this.caixaA.vinculos){
+          if (check2 == check.id){
+            this.pode = false;
+          }
+        }
+      }
+      if (this.pode){
         this.vinculosDisponiveis.push(check);
       }
     }
