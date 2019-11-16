@@ -623,7 +623,6 @@ export class ProvedorComponent implements OnInit {
   }
 
   atualizaLocalizacao(latitude, longitude){
-    console.log("IHHUU")
     this.latitude = Number(latitude);
     this.longitude = Number(longitude);
     this.zoom = 15;
