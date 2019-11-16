@@ -7,10 +7,12 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.unisul.domain.Analise;
 import br.unisul.domain.Caixa;
 import br.unisul.domain.Cliente;
 import br.unisul.domain.Provedor;
 import br.unisul.domain.Solicitacao;
+import br.unisul.repositories.AnaliseRepository;
 import br.unisul.repositories.CaixaRepository;
 import br.unisul.repositories.ClienteRepository;
 import br.unisul.repositories.ProvedorRepository;
@@ -31,6 +33,9 @@ public class DbService {
 	@Autowired
 	private CaixaRepository caixaRepository;
 	
+	@Autowired
+	AnaliseRepository analiseRepository;
+	
 	public void inicializaBancoDeDados() throws ParseException {
 		
 		Date data = new Date();
@@ -50,12 +55,18 @@ public class DbService {
 		Caixa ca1 = new Caixa(null, "Caixa 1", "-49.51875310058597", "-28.933190306812516");
 		Caixa ca2 = new Caixa(null, "Caixa 2", "-49.51248746032718", "-28.94025112836157");
 		
+		Analise a1 = new Analise(null, "Achei massa.", 5);
+		
+		a1.setCliente(c1);
+		a1.setProvedor(p1);
+		
 		s1.setCliente(c1);
 		s1.setProvedor(p1);
 		s1.setData(data);
 		s2.setCliente(c2);
 		s2.setProvedor(p1);
 		s2.setData(data);
+		
 		
 		provedorRepository.saveAll(Arrays.asList(p1, p2));
 		
@@ -68,6 +79,8 @@ public class DbService {
 		s2.setCaixa(ca1);
 			
 		clienteRepository.saveAll(Arrays.asList(c1, c2));
+
+		analiseRepository.saveAll(Arrays.asList(a1));
 	
 		solicitacaoRepository.saveAll(Arrays.asList(s1, s2));
 		

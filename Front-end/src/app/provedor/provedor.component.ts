@@ -31,7 +31,7 @@ export class ProvedorComponent implements OnInit {
   visivelCliente : boolean = false;
 
   id_provedor = JSON.parse(localStorage.getItem('provedor'));
-
+  
   selecionado : number;
 
   solicitacoes : Solicitacao [] = [];
@@ -115,6 +115,7 @@ export class ProvedorComponent implements OnInit {
         this.solicitacaoDesvincular.status = "Pendente";
 
         this.service.alterar(this.solicitacaoDesvincular).then(() => {
+          
         this.redirectTo('/provedor');
         });
 
@@ -200,7 +201,7 @@ export class ProvedorComponent implements OnInit {
   private desvincularCaixa(){
     this.caixaB = this.caixaADesvincular;
     this.service.removerVinculo(this.caixaA, this.caixaB);
-    this.service.removerVinculo(this.caixaB, this.caixaA).then(() =>
+    this.service.removerVinculo(this.caixaB, this.caixaA).then(() => 
     this.redirectTo('/provedor'));
   }
 
@@ -338,7 +339,7 @@ export class ProvedorComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-
+      
       this.service.listaNotificacoes().then((dados) => {
         this.todasNotificacoes = dados;
         for (let tN of this.todasNotificacoes){
@@ -347,6 +348,7 @@ export class ProvedorComponent implements OnInit {
             this.notificacoes.push(tN);
           }
         }
+        console.log(this.notificacoes)
       });
 
       this.service.listaSolicitacoes(this.id_provedor).then((dados) => this.solicitacoes = dados).then(() => 

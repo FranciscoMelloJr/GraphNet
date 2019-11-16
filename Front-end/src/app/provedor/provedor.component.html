@@ -219,8 +219,11 @@
                                           <mat-card class="notificacao" *ngFor="let n of notificacoes">
                                                 <strong>{{n.descricao}}</strong>
                                                 <p></p>
-                                                <button style="margin-left:395px;" (click)="atualizaLocalizacao(n.latitude, n.longitude)" type="button" class="options-notificacao" mat-button>Ver no Mapa</button>
-                                                <button type="button" (click)="removeNotificacao(n.id)" class="options-notificacao-remove" mat-button>Remover</button>
+                                                
+                                                <button style="margin-left:395px;" *ngIf="n.descricao =='Um novo cliente foi adicionado!'; else block" type="button" (click)="removeNotificacao(n.id)" class="options-notificacao-remove" mat-button>Remover</button>
+                                                <button *ngIf="n.descricao =='Um novo cliente foi adicionado!'; else block" (click)="atualizaLocalizacao(n.latitude, n.longitude)" type="button" class="options-notificacao" mat-button>Ver no Mapa</button>
+                                                <button style="margin-left:480px;" *ngIf="n.descricao =='Tem um número considerável de Clientes Pendentes nesta região.'; else block" (click)="atualizaLocalizacao(n.latitude, n.longitude)" type="button" class="options-notificacao" mat-button>Ver no Mapa</button>
+                     
                                           </mat-card>
       
                                     </div>

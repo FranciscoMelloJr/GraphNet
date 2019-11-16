@@ -13,6 +13,12 @@
     color: #3d3d3d;
 }
 
+.review {
+   background-color: #e0e0e0; 
+   font-size: 14px;
+   margin-bottom: 15px;
+}
+
 .form {
     min-width: fit-content;
     max-width: fit-content;
@@ -22,10 +28,11 @@
 .campo {
     width: 330px;   
     color: #3d3d3d;
+    font-size: 16px;
     margin-top: 5px;
-    margin-bottom: 5px;
     background-color: white;
 }
+
 
 .campo-select {
     width: 330px;

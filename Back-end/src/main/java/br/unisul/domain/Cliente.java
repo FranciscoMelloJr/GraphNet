@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -39,8 +38,8 @@ public class Cliente implements Serializable {
 	private List<Solicitacao> solicitacoes = new ArrayList<>();
 	
 	@JsonIgnore
-	@OneToOne (mappedBy="cliente")
-	private Analise analise;
+	@OneToMany (mappedBy="cliente")
+	private List<Analise> analises = new ArrayList<>();
 	
 	public Cliente(Integer id, String nome, String email, String telefone, String cep, String cpf,
 	String longitude, String latitude) {

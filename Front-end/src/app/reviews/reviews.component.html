@@ -2,12 +2,12 @@
     <div>
         <mat-form-field class="campo-select">
             <mat-select [(value)]="provedor_id" placeholder="Selecione um provedor">
-                <mat-option *ngFor="let pro of provedores" [value]="pro.id">{{pro.nomeFantasia}}</mat-option>
+                <mat-option (click)="listar()" *ngFor="let pro of provedores" [value]="pro.id">{{pro.nomeFantasia}}</mat-option>
           </mat-select>
         </mat-form-field>
     </div>
     <div>        
-        <a mat-button class="options" routerLink="/add-review">Adicionar uma Análise</a>
+        <button *ngIf="provedor_id != null; else block" mat-button class="options" (click)="adicionarAnalise()">Adicionar uma Análise</button>
     </div>
     <div fxLayout
           fxLayout.lt-lg="column"
@@ -18,8 +18,62 @@
 
         <div fxFlex="nogrow">
             <mat-card class="fundo">
-                <h6 style="color: #3d3d3d">Análises Principais:</h6>
+                    <div id = "listaAnalises">
+                        <mat-card class="review" *ngFor="let a of analises">
+                                <mat-card-header>
+                                        <mat-card-title>{{a.cliente.nome}}</mat-card-title>
+                                </mat-card-header>
+                                <mat-card-content>
+                                    <div>{{a.textoAnalise}}</div>
+                                    <p></p>
+                                    <div>
+                                    <img *ngIf="a.estrelas == 5; else block" style = "width: 130px;" src = "../../assets/5_Estrelas.png">
+                                    <img *ngIf="a.estrelas == 4; else block" style = "width: 130px;" src = "../../assets/4_Estrelas.png">
+                                    <img *ngIf="a.estrelas == 3; else block" style = "width: 130px;" src = "../../assets/3_Estrelas.png">
+                                    <img *ngIf="a.estrelas == 2; else block" style = "width: 130px;" src = "../../assets/2_Estrelas.png">
+                                    <img *ngIf="a.estrelas == 1; else block" style = "width: 130px;" src = "../../assets/1_Estrela.png">
+                                    </div>
+                                </mat-card-content>
+                        </mat-card>
+                    </div>
 
+                    <div id = "adicionarAnalise" style="display: none;">
+                        <form>
+                            <div>
+                            <mat-form-field class="campo" appearance="outline">
+                                <input matInput placeholder="Nome" [formControl]="nomeFormControl">
+                                <mat-error *ngIf="nomeFormControl.hasError('required')">
+                                    O nome é <strong>obrigatório</strong>
+                                </mat-error>
+                            </mat-form-field>
+                            </div>
+                            <div>
+                            <mat-form-field class="campo" appearance="outline">
+                                    <input matInput placeholder="CPF" [formControl]="cpfFormControl">
+                                    <mat-error *ngIf="cpfFormControl.hasError('required')">
+                                          O CPF é <strong>obrigatório</strong>
+                                    </mat-error>
+                            </mat-form-field>
+                            </div>  
+                            <div>
+                            <mat-form-field class="campo" appearance="outline">
+                                    <textarea rows="10" matInput placeholder="Análise" [formControl]="analiseFormControl"></textarea>
+                                    <mat-error *ngIf="analiseFormControl.hasError('required')">
+                                        A análise é <strong>obrigatória</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div> 
+                            <div>
+                                <button type = "button" (click)="set1estrela()" mat-button><img id="estrela1" style="height: 30px;"></button>
+                                <button type = "button" (click)="set2estrelas()" mat-button><img id="estrelas2" style="height: 30px;"></button>
+                                <button type = "button" (click)="set3estrelas()" mat-button><img id="estrelas3" style="height: 30px;"></button>
+                                <button type = "button" (click)="set4estrelas()" mat-button><img id="estrelas4" style="height: 30px;"></button>
+                                <button type = "button" (click)="set5estrelas()" mat-button><img id="estrelas5" style="height: 30px;"></button>
+                            </div>               
+                            <button mat-button class="options" (click)="enviarAnalise()">Enviar Análise</button>  
+                            <button mat-button class="options" (click)="redirectTo('/analises')">Cancelar</button>               
+                        </form>
+                    </div>
 
             </mat-card>                          
 
