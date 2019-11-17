@@ -360,10 +360,6 @@ export class ProvedorComponent implements OnInit {
           var data2 = this.datePipe.transform(this.datePipe.transform(this.data, 'yyyy-MM-dd'));
           var data = this.datePipe.transform(this.datePipe.transform(s.data, 'yyyy-MM-dd'));
           var date1 = new Date(data);
-          
-          console.log(date1);
-
-          console.log(date2);
           var date2 = new Date(data2);
           var timeDiff = Math.abs(date2.getTime() - date1.getTime());
           var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
@@ -540,7 +536,6 @@ export class ProvedorComponent implements OnInit {
       }).then(() => {
         this.service.listaNotificacoes().then((dados) => {
           this.todasNotificacoes = dados;
-          console.log(dados);
           for (let tN of this.todasNotificacoes){
             if (tN.provedor.id == this.id_provedor){
               this.qtd = this.qtd + 1;
@@ -548,7 +543,7 @@ export class ProvedorComponent implements OnInit {
             }
           }
         });
-      });
+      })
 
 
       function distancia(lat1, lon1, lat2, lon2, unit) {
@@ -617,8 +612,27 @@ export class ProvedorComponent implements OnInit {
         });
       });
 
-    });
+    })
+
+    this.timeout();
   }
+
+  timeout() {
+    setTimeout(() => {
+      this.service.listaNotificacoes().then((dados) => {
+        this.todasNotificacoes = dados;
+        this.notificacoes = [];
+        this.qtd = 0;
+        for (let tN of this.todasNotificacoes){
+          if (tN.provedor.id == this.id_provedor){
+            this.notificacoes.push(tN);
+            this.qtd = this.qtd + 1;
+          }
+        }
+      });
+        this.timeout();
+    }, 1000);
+} 
 
   private setLocalizacao() {
     if ('geolocation' in navigator) {
@@ -637,7 +651,6 @@ export class ProvedorComponent implements OnInit {
   }
 
   markerDragEnd($event: MouseEvent) {
-    console.log($event);
     this.latitudeCli = $event.coords.lat;
     this.longitudeCli = $event.coords.lng;
     this.latitude = this.latitudeCli;
@@ -654,8 +667,6 @@ export class ProvedorComponent implements OnInit {
 
   getAddress(latitude, longitude) {
     this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
-      console.log(results);
-      console.log(status);
       if (status === 'OK') {
         if (results[0]) {
           this.zoom = 15;
