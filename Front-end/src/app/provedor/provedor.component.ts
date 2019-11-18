@@ -615,12 +615,14 @@ export class ProvedorComponent implements OnInit {
     })
 
     this.timeout();
+
   }
 
   timeout() {
     setTimeout(() => {
       this.service.listaNotificacoes().then((dados) => {
         this.todasNotificacoes = dados;
+        console.log("test")
         this.notificacoes = [];
         this.qtd = 0;
         for (let tN of this.todasNotificacoes){
@@ -630,7 +632,6 @@ export class ProvedorComponent implements OnInit {
           }
         }
       });
-        this.timeout();
     }, 1000);
 } 
 
