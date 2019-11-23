@@ -65,4 +65,5 @@ export class Notificacao {
     provedor = new Provedor();
     latitude: string;
     longitude: string;
+    tipo: string;
 }

@@ -494,44 +494,16 @@ export class ProvedorComponent implements OnInit {
         }).then(() => {
 
           for (let n of this.notificacoesFiltrar){
-            if (n.descricao == "Tem um número considerável de Clientes Pendentes nesta região."){
+            if (n.tipo == "dist"){
               this.service.removeNotificacao(n.id);
             }
           }
 
 
         }).then(() => {
-          // Função Principal, verifica os clientes pendentes pra ver os próximos
           
-        var jaObservados : Pendente [] = [];
-        for (let p1 of this.pendentes) {
-          var contador: number = 0;
-          for (let p2 of this.pendentes) {
-            var pode : boolean = true;
-            for (let jo of jaObservados){
-              if (jo == p2) {
-                pode = false;
-              }
-            }
-            if (pode == true){
-              if (p2.id != p1.id) {
-                var calculo = distancia(p1.latitude,p1.longitude, p2.latitude, p2.longitude, "K");
-                if (calculo < 1){
-                  contador = contador + 1;
-                  jaObservados.push(p2);
-                }
-              }
-            }
-          }  
-          if (contador >= 2) {
-            var notificacao : Notificacao = new Notificacao();
-            notificacao.descricao = "Tem um número considerável de Clientes Pendentes nesta região."
-            notificacao.latitude = "" + p1.latitude;
-            notificacao.longitude = "" + p1.longitude;
-            notificacao.provedor.id = this.id_provedor;
-            this.service.adicionarNotificacao(notificacao);
-          }
-        }
+        this.timeoutCaixas();
+          
         })
       }).then(() => {
         this.service.listaNotificacoes().then((dados) => {
@@ -544,26 +516,6 @@ export class ProvedorComponent implements OnInit {
           }
         });
       })
-
-
-      function distancia(lat1, lon1, lat2, lon2, unit) {
-        var radlat1 = Math.PI * lat1/180;
-        var radlat2 = Math.PI * lat2/180;
-        var theta = lon1-lon2;
-        var radtheta = Math.PI * theta/180;
-        var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
-        if (dist > 1) {
-          dist = 1;
-        }
-        dist = Math.acos(dist);
-        dist = dist * 180/Math.PI;
-        dist = dist * 60 * 1.1515;
-        if (unit=="K") { dist = dist * 1.609344 }
-        if (unit=="N") { dist = dist * 0.8684 }
-        return dist;
-      }
-
-      
 
 
       // Google Maps API
@@ -617,12 +569,116 @@ export class ProvedorComponent implements OnInit {
     this.timeout();
 
   }
+ 
+  timeoutCaixas() {
+    setTimeout(() => {
+     
+        
+      var descricao : string = "";
+      var jaObservados : Pendente [] = [];
+      for (let p1 of this.pendentes) {
+        var contador: number = 0;
+        for (let p2 of this.pendentes) {
+          var pode : boolean = true;
+          for (let jo of jaObservados){
+            if (jo == p2) {
+              pode = false;
+            }
+          }
+          if (pode == true){
+            if (p2.id != p1.id) {
+              var calculo = this.distancia(p1.latitude,p1.longitude, p2.latitude, p2.longitude, "K");
+              if (calculo < 1){
+                contador = contador + 1;
+                jaObservados.push(p2);
+                var menorDist: Number = 999999;
+                var menorCaixa: Caixa = new Caixa();
+                for (let caixa of this.caixas) {
+                  var calculoCaixa = this.distancia(p2.latitude,p2.longitude, caixa.latitude, caixa.longitude, "K");
+                  if (calculoCaixa < menorDist){
+                    menorDist = calculoCaixa;
+                    menorCaixa = caixa;
+                  }
+                }
+                descricao += "\n" + "O Cliente " + p2.id + " está mais próximo da caixa " + menorCaixa.nome + ", o custo (de cabos) de implementação"
+                  + " até a sua localidade é de aproximadamente R$ " + Math.round((0.5 * (Number(menorDist) * 1000)));
+                  console.log(descricao)
+              }
+            }
+          }
+        }  
+        if (contador >= 2) {
+          var menorDist: Number = 999999;
+          var menorCaixa: Caixa = new Caixa();
+          for (let caixa of this.caixas) {
+            var calculoCaixa = this.distancia(p1.latitude,p1.longitude, caixa.latitude, caixa.longitude, "K");
+            if (calculoCaixa < menorDist){
+              menorDist = calculoCaixa;
+              menorCaixa = caixa;
+            }
+          }
+          descricao += "\n" + "O Cliente " + p1.id + " está mais próximo da caixa " + menorCaixa.nome + ", o custo (de cabos) de implementação"
+            + " até a sua localidade é de aproximadamente R$ " + Math.round((0.5 * (Number(menorDist) * 1000)));
+          var notificacao : Notificacao = new Notificacao();
+          notificacao.descricao = "Tem um número considerável de Clientes Pendentes nesta região." + descricao;
+          notificacao.latitude = "" + p1.latitude;
+          notificacao.longitude = "" + p1.longitude;
+          notificacao.provedor.id = this.id_provedor;
+          notificacao.tipo = "dist";
+          this.service.adicionarNotificacao(notificacao);
+        }
+      }
+    }, 1000);
+} 
 
   timeout() {
+    
+    var descricao : string = "";
+    var jaObservados : Pendente [] = [];
+    for (let p1 of this.pendentes) {
+      var contador: number = 0;
+      for (let p2 of this.pendentes) {
+        var pode : boolean = true;
+        for (let jo of jaObservados){
+          if (jo == p2) {
+            pode = false;
+          }
+        }
+        if (pode == true){
+          if (p2.id != p1.id) {
+            var calculo = this.distancia(p1.latitude,p1.longitude, p2.latitude, p2.longitude, "K");
+            if (calculo < 1){
+              contador = contador + 1;
+              jaObservados.push(p2);
+              var menorDist: Number = 999999;
+              var menorCaixa: Caixa = new Caixa();
+              for (let caixa of this.caixas) {
+                var calculoCaixa = this.distancia(p1.latitude,p1.longitude, caixa.latitude, caixa.longitude, "K");
+                if (calculoCaixa < menorDist){
+                  menorDist = calculoCaixa;
+                  menorCaixa = caixa;
+                }
+              }
+              descricao += "\n" + "O Cliente " + p2.id + " está mais próximo da caixa " + menorCaixa.nome + ", o custo de implementação"
+                + " até a sua localidade é de R$ " + (0.5 * (Number(menorDist) * 1000));
+                console.log(descricao)
+            }
+          }
+        }
+      }  
+      if (contador >= 2) {
+        var notificacao : Notificacao = new Notificacao();
+        notificacao.descricao = "Tem um número considerável de Clientes Pendentes nesta região." + descricao;
+        notificacao.latitude = "" + p1.latitude;
+        notificacao.longitude = "" + p1.longitude;
+        notificacao.provedor.id = this.id_provedor;
+        notificacao.tipo = "dist";
+        this.service.adicionarNotificacao(notificacao);
+      }
+    }
     setTimeout(() => {
       this.service.listaNotificacoes().then((dados) => {
         this.todasNotificacoes = dados;
-        console.log("test")
         this.notificacoes = [];
         this.qtd = 0;
         for (let tN of this.todasNotificacoes){
@@ -632,9 +688,25 @@ export class ProvedorComponent implements OnInit {
           }
         }
       });
-    }, 1000);
+    }, 2500);
 } 
 
+  private distancia(lat1, lon1, lat2, lon2, unit) {
+    var radlat1 = Math.PI * lat1/180;
+    var radlat2 = Math.PI * lat2/180;
+    var theta = lon1-lon2;
+    var radtheta = Math.PI * theta/180;
+    var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+    if (dist > 1) {
+      dist = 1;
+    }
+    dist = Math.acos(dist);
+    dist = dist * 180/Math.PI;
+    dist = dist * 60 * 1.1515;
+    if (unit=="K") { dist = dist * 1.609344 }
+    if (unit=="N") { dist = dist * 0.8684 }
+    return dist;
+  }
   private setLocalizacao() {
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {

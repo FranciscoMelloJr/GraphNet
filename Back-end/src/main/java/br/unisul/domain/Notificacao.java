@@ -2,6 +2,7 @@ package br.unisul.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,20 +23,24 @@ public class Notificacao implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@Column(length = 1000)
 	private String descricao;
 	
 	private String latitude;
 	private String longitude;
+	
+	private String tipo;
 
 	@ManyToOne
 	@JoinColumn (name="provedor_id")
 	private Provedor provedor;
 	
-	public Notificacao(Integer id, String descricao, String latitude, String longitude) {
+	public Notificacao(Integer id, String descricao, String latitude, String longitude, String tipo) {
 		this.id = id;
 		this.descricao = descricao;
 		this.latitude = latitude;
 		this.longitude = longitude;
+		this.tipo = tipo;
 	}
 	
 	public Notificacao(Notificacao n) {
@@ -43,6 +48,7 @@ public class Notificacao implements Serializable {
 		this.descricao = n.getDescricao();
 		this.latitude = n.getLatitude();
 		this.longitude = n.getLongitude();
+		this.tipo = n.getTipo();
 	}
 
 }
