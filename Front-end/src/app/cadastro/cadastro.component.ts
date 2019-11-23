@@ -4,6 +4,7 @@ import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core'
 import { MapsAPILoader, MouseEvent } from '@agm/core';
 import { CadastroService } from './cadastro.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HttpService } from '../server/http.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -38,6 +39,7 @@ export class CadastroComponent implements OnInit {
   
 
   constructor(
+    public http: HttpService,
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
     private service: CadastroService,
@@ -45,15 +47,18 @@ export class CadastroComponent implements OnInit {
 
 
   inserir() {
-    this.cliente.nome = this.nomeFormControl.value;
-    this.cliente.email = this.emailFormControl.value;
-    this.cliente.telefone = this.telefoneFormControl.value;
-    this.cliente.cep = this.cepFormControl.value;
-    this.cliente.cpf = this.cpfFormControl.value;
-    this.cliente.latitude = this.latitude.toString();
-    this.cliente.longitude = this.longitude.toString();
-    this.service.adicionarCliente(this.cliente).then(
-      () => this.inserirSolicitacao());
+    
+
+  this.cliente.nome = this.nomeFormControl.value;
+  this.cliente.email = this.emailFormControl.value;
+  this.cliente.telefone = this.telefoneFormControl.value;
+  this.cliente.cep = this.cepFormControl.value;
+  this.cliente.cpf = this.cpfFormControl.value;
+  this.cliente.latitude = this.latitude.toString();
+  this.cliente.longitude = this.longitude.toString();
+  this.service.adicionarCliente(this.cliente).then(
+      () => this.inserirSolicitacao());  
+    
   }
 
   inserirSolicitacao() {
@@ -66,9 +71,19 @@ export class CadastroComponent implements OnInit {
     this.notificacao.provedor.id = this.provedor_id;
     this.notificacao.descricao = 'Um novo cliente foi adicionado!';
     this.notificacao.latitude = this.latitude.toString();
+    console.log(this.emailFormControl.value);
     this.notificacao.longitude = this.longitude.toString();
     this.service.adicionarSolicitacao(this.solicitacao).then(() => {
       this.service.adicionarNotificacao(this.notificacao).then(() => {
+        let user = {
+          nome: this.nomeFormControl.value,
+          email: this.emailFormControl.value
+        }
+        this.http.sendEmail("http://localhost:3000/sendmailcliente", user).subscribe(
+          data => {
+            let res:any = data; 
+          }
+        )
         this.redirectTo('/cadastro');
       })
     });
