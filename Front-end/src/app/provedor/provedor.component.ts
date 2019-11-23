@@ -600,7 +600,7 @@ export class ProvedorComponent implements OnInit {
                     menorCaixa = caixa;
                   }
                 }
-                descricao += "\n" + "O Cliente " + p2.id + " está mais próximo da caixa " + menorCaixa.nome + ", o custo (de cabos) de implementação"
+                descricao += "\n" + "O Cliente " + p2.nome + " está mais próximo da caixa " + menorCaixa.nome + ", o custo (de cabos) de implementação"
                   + " até a sua localidade é de aproximadamente R$ " + Math.round((0.5 * (Number(menorDist) * 1000)));
                   console.log(descricao)
               }
@@ -617,7 +617,7 @@ export class ProvedorComponent implements OnInit {
               menorCaixa = caixa;
             }
           }
-          descricao += "\n" + "O Cliente " + p1.id + " está mais próximo da caixa " + menorCaixa.nome + ", o custo (de cabos) de implementação"
+          descricao += "\n" + "O Cliente " + p1.nome + " está mais próximo da caixa " + menorCaixa.nome + ", o custo (de cabos) de implementação"
             + " até a sua localidade é de aproximadamente R$ " + Math.round((0.5 * (Number(menorDist) * 1000)));
           var notificacao : Notificacao = new Notificacao();
           notificacao.descricao = "Tem um número considerável de Clientes Pendentes nesta região." + descricao;
