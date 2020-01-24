@@ -1,4 +1,4 @@
-![](https://raw.githubusercontent.com/FranciscoMelloJr/GraphNet/master/Prototipos/New/GraphNet%20-%20Logo%20v2.png)
+![](https://raw.githubusercontent.com/FranciscoMelloJr/GraphNet/master/3.%20Documentos%20%26%20etc/Prototipos/New/GraphNet%20-%20Logo%20v2.png)
 
 # GraphNet
 ### Sobre o repositório
