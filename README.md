@@ -16,12 +16,12 @@ O GraphNet é uma aplicação web dividida em dois flows principais: **Usuários
 -------------
 ### Equipe
 
-**Front-end & Back-end Developer/DBA:** [Lucas de Abreu](https://github.com/Lucas-Abreu) ![](https://img.shields.io/github/followers/Lucas-Abreu?label=Seguir%21&style=social)
+**Front-end & Back-end Developer/DBA:** [Lucas de Abreu](https://github.com/Lucas-Abreu)
 
-**Manager/DBA:** [Francisco de Assis de Mello Jr.](https://github.com/FranciscoMelloJR) ![](https://img.shields.io/github/followers/FranciscoMelloJR?label=Seguir%21&style=social)
+**Manager/DBA:** [Francisco de Assis de Mello Jr.](https://github.com/FranciscoMelloJR)
 
-**Back-end Developer/DBA:** [Gustavo Zancheta Ribeiro](https://github.com/GuZancheta) ![](https://img.shields.io/github/followers/GuZancheta?label=Seguir%21&style=social)
+**Back-end Developer/DBA:** [Gustavo Zancheta Ribeiro](https://github.com/GuZancheta)
 
-**DBA:** [Júlia Luiz Cardoso](https://github.com/JLuizCardoso) ![](https://img.shields.io/github/followers/JLuizCardoso?label=Seguir%21&style=social)
+**DBA:** [Júlia Luiz Cardoso](https://github.com/JLuizCardoso)
 
 -------------
