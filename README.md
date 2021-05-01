@@ -16,7 +16,7 @@ O GraphNet é uma aplicação web dividida em dois flows principais: **Usuários
 -------------
 ### Equipe
 
-**Front-end & Back-end Developer/DBA:** [Lucas de Abreu](https://github.com/Lucas-Abreu)
+**Front-end & Back-end Developer/DBA:** [Lucas de Abreu](https://github.com/lucas-de-abreu)
 
 **Manager/DBA:** [Francisco de Assis de Mello Jr.](https://github.com/FranciscoMelloJR)
 
